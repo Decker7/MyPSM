@@ -7,10 +7,10 @@
       </a>
     </div>
     <div class="flex gap-x-12">
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Product</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Features</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Marketplace</a>
-      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Company</a>
+      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Home</a>
+      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">About</a>
+      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Feedback</a>
+      <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Discover Activity</a>
     </div>
     <div class="flex justify-end flex-1">
       <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span aria-hidden="true">&rarr;</span></a>
