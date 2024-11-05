@@ -13,7 +13,7 @@
 
             <a href="{{ route('About') }}" class="text-sm font-semibold leading-6 text-gray-900">About</a>
             <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Feedback</a>
-            <a href="{{ route('Discover') }}" class="text-sm font-semibold leading-6 text-gray-900">Discover Activity</a>
+            <a href="{{ route('activities.filter') }}" class="text-sm font-semibold leading-6 text-gray-900">Discover Activity</a>
         </div>
         <div class="flex justify-end flex-1">
             <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span

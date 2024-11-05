@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Activity extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'activity_level',
+        'budget',
+        'time_frame',
+        'image',
+    ];
+
+    // Accessor to get the full URL for the image
+    public function getImageUrlAttribute()
+    {
+        // If image exists, return the URL, else null
+        return $this->image ? asset('images/' . $this->image) : null;
+    }
+}
