@@ -34,7 +34,7 @@ Route::get('/About', function () {
 })->name('About');
 
 
-Route::get('/Discover', [HomeController::class, 'filterActivities'])->name('activities.filter');
+Route::get('/Discover', [HomeController::class, 'filterActivities'])->name('activities.filter')->middleware(['auth', 'customer']);
 
 
 Route::controller(LoginController::class)->group(function () {
