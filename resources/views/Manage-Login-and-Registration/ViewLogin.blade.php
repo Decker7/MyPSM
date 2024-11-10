@@ -58,6 +58,14 @@
                 <span>Don't have an account yet?
                     <a href="{{ route('register') }}"
                         class="text-blue-600 hover:text-blue-800 hover:underline">Register</a></span>
+                        <br>
+                <span>
+                    Want to explore the website without signing up?
+                    <a href="{{ route('Home') }}" class="text-blue-600 hover:text-blue-800 hover:underline">
+                        Visit the Homepage
+                    </a>
+                </span>
+
             </form>
         </div>
     </div>

@@ -57,4 +57,18 @@ class loginController extends Controller
 
         return redirect()->route('Home');
     }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login'); // Redirect to login or homepage after logout
+    }
+
+    public function profile()
+    {
+        return view('Manage-Profile.ViewProfile');
+    }
 }
