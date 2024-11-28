@@ -14,7 +14,8 @@ class CreateActivitiesTable extends Migration
             $table->string('activity_level'); // Activity level
             $table->decimal('budget', 8, 2); // Budget for the activity
             $table->string('time_frame'); // Time frame for the activity
-            $table->string('image')->nullable(); // Image path (optional)
+            $table->string('address')->nullable(); // Address of the activity
+            $table->string('description')->nullable(); // Description of the activity
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

@@ -5,11 +5,6 @@
 
 
         <div>
-
-
-
-
-
             <main class="max-w-2xl px-4 mx-auto lg:max-w-7xl lg:px-8">
                 <div class="pt-24 pb-10 border-b border-gray-200">
                     <h1 class="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
@@ -27,6 +22,10 @@
                             <div class="hidden lg:block">
                                 <form class="space-y-10 divide-y divide-gray-200">
                                     <div>
+                                        
+
+                                        
+                                        
                                         <fieldset>
                                             <legend class="block text-sm font-medium text-gray-900">Activity Level</legend>
                                             <div class="pt-6 space-y-3">
@@ -58,6 +57,17 @@
                                                         {{ request()->has('activity_level') && in_array('High', request('activity_level')) ? 'checked' : '' }}>
                                                     <label for="activity-level-high"
                                                         class="ml-3 text-sm text-gray-600">High</label>
+                                                </div>
+
+                                                <div class="pt-6 space-y-3">
+                                                    <!-- Add weights input -->
+                                                    <div class="flex items-center">
+                                                        <label for="weight-activity-level"
+                                                            class="block mr-2 text-sm text-gray-600">Weight:</label>
+                                                        <input id="weight-activity-level" name="weight_activity_level"
+                                                            type="number" min="0" max="100"
+                                                            value="{{ old('weight_activity_level') }}">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -96,6 +106,17 @@
                                                         Budget</label>
                                                 </div>
 
+                                                <div class="pt-6 space-y-3">
+                                                    <!-- Add weights input -->
+                                                    <div class="flex items-center">
+                                                        <label for="weight-budget"
+                                                            class="block mr-2 text-sm text-gray-600">Weight:</label>
+                                                        <input id="weight-budget" name="weight_budget" type="number"
+                                                            min="0" max="100"
+                                                            value="{{ old('weight_budget') }}">
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </fieldset>
                                     </div>
@@ -130,6 +151,17 @@
                                                         Month</label>
                                                 </div>
 
+                                                <div class="pt-6 space-y-3">
+                                                    <!-- Add weights input -->
+                                                    <div class="flex items-center">
+                                                        <label for="weight-time-frame"
+                                                            class="block mr-2 text-sm text-gray-600">Weight:</label>
+                                                        <input id="weight-time-frame" name="weight_time_frame"
+                                                            type="number" min="0" max="100"
+                                                            value="{{ old('weight_time_frame') }}">
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </fieldset>
                                     </div>
@@ -159,76 +191,57 @@
                             {{-- THIS IS THE REAL ECO TOURISM ACTIVITIES --}}
                             @forelse ($activities as $activity)
                                 <div
-                                    class="relative flex flex-col overflow-hidden transition-shadow bg-white border border-gray-200 rounded-lg shadow-md group hover:shadow-lg">
-                                    <div
-                                        class="bg-gray-200 aspect-h-4 aspect-w-3 sm:aspect-none group-hover:opacity-75 sm:h-96">
-                                        @if ($activity->image)
-                                            <img src="{{ asset($activity->image) }}" alt="{{ $activity->name }}"
-                                                class="object-cover object-center w-full h-full sm:h-full sm:w-full">
-                                        @else
-                                            <div class="flex items-center justify-center h-48 mb-4 bg-gray-200 rounded-md">
-                                                <span class="text-gray-500">No Image Available</span>
+                                    class="relative flex flex-col overflow-hidden bg-white border border-gray-200 rounded-lg shadow-md group hover:shadow-lg">
+                                    <div class="flex-auto p-6">
+                                        <dl class="space-y-4">
+                                            <div>
+                                                <dt class="text-sm font-semibold text-gray-900">Budget</dt>
+                                                <dd class="mt-1 text-base font-semibold text-gray-900">
+                                                    RM{{ $activity->budget }}</dd>
                                             </div>
-                                        @endif
-                                    </div>
-                                    <div class="flex flex-col flex-1 p-4 space-y-2">
-                                        <h3 class="text-sm font-medium text-gray-900">
-                                            {{ $activity->name }}
-
-                                        </h3>
-
-                                        <div class="flex flex-col items-start gap-y-2">
-                                            <div class="flex items-center gap-x-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5" />
-                                                </svg>
-                                                <span class="text-sm text-gray-700">Activity Level :
-                                                    {{ $activity->activity_level }}</span>
+                                            <div>
+                                                <h3 class="text-lg font-medium text-gray-900">{{ $activity->name }}</h3>
+                                                <p class="text-sm text-gray-700">{{ $activity->description }}</p>
+                                                <p class="text-sm text-gray-700">{{ $activity->address }}</p>
                                             </div>
-
-                                            <div class="flex items-center gap-x-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="m4.5 12.75 6 6 9-13.5" />
-                                                </svg>
-                                                <span class="text-sm text-gray-700">Time Frame :
-                                                    {{ $activity->time_frame }}</span>
+                                            <div class="mt-4 space-y-2">
+                                                <div class="flex items-center gap-x-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m4.5 12.75 6 6 9-13.5" />
+                                                    </svg>
+                                                    <span class="text-sm text-gray-700">Activity Level:
+                                                        {{ $activity->activity_level }}</span>
+                                                </div>
+                                                <div class="flex items-center gap-x-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="m4.5 12.75 6 6 9-13.5" />
+                                                    </svg>
+                                                    <span class="text-sm text-gray-700">Time Frame:
+                                                        {{ $activity->time_frame }}</span>
+                                                </div>
                                             </div>
-
-
-                                        </div>
-
-
-
-
-                                        <p class="text-sm text-gray-500">Stay warm and stylish with our trendy hoodie,
-                                            perfect
-                                            for any occasion.</p>
-                                        <div class="flex flex-col justify-end flex-1">
-                                            <p class="text-sm italic text-gray-500">Available in various colors</p>
-                                            <p class="text-base font-medium text-gray-900">${{ $activity->budget }}</p>
-                                        </div>
+                                        </dl>
                                     </div>
 
-                                    <div class="mb-5 ml-6">
-                                        <button type="button"
-                                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Book
-                                            Now</button>
+                                    <div class="mx-6 mb-6">
+                                        <a href="{{ route('booking.page', $activity->id) }}"
+                                            class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 no-underline">
+                                            Book Now
+                                        </a>
                                     </div>
-
-
-
                                 </div>
                             @empty
                                 <div class="text-center text-gray-600">
                                     <p>No activities found with the selected filters.</p>
                                 </div>
                             @endforelse
+
 
 
 

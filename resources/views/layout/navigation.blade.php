@@ -37,6 +37,14 @@
                         <a href="{{ route('activities.filter') }}"
                             class="inline-flex items-center px-1 pt-1 text-sm font-medium text-black no-underline hover:text-blue-500">DISCOVER
                             ACITIVITY</a>
+                        @if ($paymentExists)
+                            <a href="{{route('booking.history')}}"
+                                class="inline-flex items-center px-1 pt-1 text-sm font-medium text-black no-underline hover:text-blue-500">
+                                BOOKING HISTORY
+                            </a>
+                        @endif
+
+
                     </div>
                 </div>
 

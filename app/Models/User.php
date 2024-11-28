@@ -29,4 +29,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // In User.php (User Model)
+    public function bookings()
+    {
+        return $this->hasMany(Payment::class);
+    }
 }

@@ -14,7 +14,8 @@ class Activity extends Model
         'activity_level',
         'budget',
         'time_frame',
-        'image',
+        'address',
+        'description',
     ];
 
     // Accessor to get the full URL for the image
