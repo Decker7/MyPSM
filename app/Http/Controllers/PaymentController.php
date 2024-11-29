@@ -7,6 +7,8 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use App\Models\Activity;
 use App\Models\Payment;
+use App\Models\Time;
+
 use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
@@ -18,15 +20,14 @@ class PaymentController extends Controller
     {
         $activity = Activity::findOrFail($id);
 
-        // dd($activities);
-
         // Access the currently authenticated user
         $user = Auth::user();
 
+        // Retrieve times that match the activity_id
+        $times = Time::where('activity_id', $id)->get();
 
-
-        // Pass the activity details to the view
-        return view('Manage-Booking-Activities.ViewBooking', compact('activity', 'user'));
+        // Pass the activity details and times to the view
+        return view('Manage-Booking-Activities.ViewBooking', compact('activity', 'user', 'times'));
     }
 
     public function processPayment(Request $request)
@@ -91,8 +92,7 @@ class PaymentController extends Controller
             'phone' => 'nullable|string|max:15',
             'number_of_adults' => 'required|integer|min:0',
             'number_of_children' => 'required|integer|min:0',
-            'date' => 'required|date',
-            'time' => 'nullable|string',
+            'date_time' => 'required|date',
             'total_price' => 'required|numeric',
             'special_requests' => 'nullable|string',
         ]);
@@ -107,8 +107,7 @@ class PaymentController extends Controller
             'phone' => $validated['phone'],
             'number_of_adults' => $validated['number_of_adults'],
             'number_of_children' => $validated['number_of_children'],
-            'date' => $validated['date'],
-            'time' => $validated['time'],
+            'date_time' => $validated['date_time'],
             'total_price' => $validated['total_price'],
             'special_requests' => $validated['special_requests'],
         ]);
@@ -137,8 +136,7 @@ class PaymentController extends Controller
             'phone' => $bookingDetails['phone'] ?? null,
             'number_of_adults' => $bookingDetails['number-of-adults'] ?? 0,
             'number_of_children' => $bookingDetails['number-of-children'] ?? 0,
-            'date' => $bookingDetails['date'] ?? now()->toDateString(),
-            'time' => $bookingDetails['time'] ?? '00:00',
+            'date_time' => $bookingDetails['date_time'] ?? now()->toDateString(),
             'total_price' => $totalPrice,
             'special_requests' => $bookingDetails['special-requests'] ?? null,
         ]);
@@ -160,8 +158,7 @@ class PaymentController extends Controller
             'phone' => 'required|string|max:15',
             'number-of-adults' => 'required|integer|min:1',
             'number-of-children' => 'nullable|integer|min:0',
-            'date' => 'required|date|after_or_equal:today',
-            'time' => 'required',
+            'date_time' => 'required|date',
             'payment-method' => 'required|string|in:Pay with Card,Cash on Arrival',
         ]);
 
@@ -203,5 +200,27 @@ class PaymentController extends Controller
         $booking->delete(); // Or change the status to 'Cancelled'
 
         return redirect()->route('booking.history')->with('success', 'Booking cancelled successfully.');
+    }
+
+    public function displayBookingHistory()
+    {
+        // Access the currently authenticated user
+        $user = Auth::user();
+
+        // Ensure the user is authenticated, return an error if not
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You need to be logged in to view this page.');
+        }
+
+        // Retrieve the IDs of activities that belong to the authenticated user
+        $activityIds = Activity::where('user_id', $user->id)->pluck('id');
+
+        // Retrieve bookings for those activities
+        $bookings = Payment::whereIn('activity_id', $activityIds)->with('activity')->get();
+
+        // dd($bookings);
+
+        // Remove the debug dump and return the view with bookings
+        return view('Owner-Page.OwnerBookingHistory', compact('bookings'));
     }
 }

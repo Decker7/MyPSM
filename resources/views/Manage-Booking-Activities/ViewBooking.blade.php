@@ -96,21 +96,19 @@
                             </div>
                         </div>
 
-                        <!-- Preferred Date -->
+                        <!-- Preferred Date and Time -->
                         <div class="sm:col-span-3">
-                            <label for="date" class="block text-sm font-medium text-gray-900">Preferred Date</label>
+                            <label for="date-time" class="block text-sm font-medium text-gray-900">Preferred Date and
+                                Time</label>
                             <div class="mt-2">
-                                <input type="date" name="date" id="date"
+                                <select name="date_time" id="date-time"
                                     class="block w-full px-4 py-2 text-gray-900 border-2 border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 placeholder:text-gray-400 focus:outline-none sm:text-sm">
-                            </div>
-                        </div>
-
-                        <!-- Preferred Time -->
-                        <div class="sm:col-span-3">
-                            <label for="time" class="block text-sm font-medium text-gray-900">Preferred Time</label>
-                            <div class="mt-2">
-                                <input type="time" name="time" id="time"
-                                    class="block w-full px-4 py-2 text-gray-900 border-2 border-gray-300 rounded-lg shadow-md focus:ring-2 focus:ring-indigo-600 focus:border-indigo-600 placeholder:text-gray-400 focus:outline-none sm:text-sm">
+                                    <option value="" disabled selected>Select a date and time</option>
+                                    @foreach ($times as $time)
+                                        <option value="{{ $time->date }} {{ $time->time }}">{{ $time->date }}
+                                            {{ $time->time }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

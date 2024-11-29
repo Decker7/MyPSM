@@ -10,6 +10,7 @@ class CreateActivitiesTable extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id(); // Primary key
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('name'); // Activity name
             $table->string('activity_level'); // Activity level
             $table->decimal('budget', 8, 2); // Budget for the activity

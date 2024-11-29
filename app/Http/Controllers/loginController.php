@@ -29,7 +29,7 @@ class loginController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'level' => 'Admin'
+            'level' => 'Customer'
         ]);
 
         return redirect()->route('login');
@@ -55,7 +55,13 @@ class loginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->route('Home');
+        $user = Auth::user(); // Get the currently authenticated user
+
+        if ($user->user_type === 'customer') {
+            return redirect()->route('Home');
+        } elseif ($user->user_type === 'activity_owner') {
+            return redirect()->route('Owner.Dashboard');
+        }
     }
 
     public function logout(Request $request)

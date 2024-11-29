@@ -4,6 +4,12 @@
 
 @endsection
 
+@extends('layout.ownerweb')
+
+@section('owner_content')
+
+@endsection
+
 
 public function filterActivities(Request $request)
     {

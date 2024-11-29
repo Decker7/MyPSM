@@ -23,9 +23,8 @@
                                     <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
                                         Total Payments</th>
                                     <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                                        Preferred Date</th>
-                                    <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                                        Preferred Time</th>
+                                        Preferred Date and Time</th>
+                                    
                                     <th scope="col" class="relative py-3.5 pl-3 pr-4 text-center sm:pr-6"><span
                                             class="sr-only">Actions</span></th>
                                 </tr>
@@ -39,9 +38,8 @@
                                         <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
                                             {{ $booking->total_price }}</td>
                                         <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ \Carbon\Carbon::parse($booking->date)->format('Y-m-d') }}</td>
-                                        <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ $booking->time }}</td>
+                                            {{ \Carbon\Carbon::parse($booking->date_time)->format('Y-m-d') }}</td>
+                                        
                                         <td
                                             class="relative py-4 pl-3 pr-4 text-sm font-medium text-center whitespace-nowrap sm:pr-6">
 

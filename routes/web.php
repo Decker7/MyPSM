@@ -4,6 +4,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\OwnerDashboardController;
+use App\Http\Controllers\OwnerActivityController;
+
+
+
 use App\Models\Activity;
 use Illuminate\Support\Facades\Route;
 
@@ -106,3 +112,16 @@ Route::get('/BookingHistory', [PaymentController::class, 'showBookingHistory'])
     ->name('booking.history');
 
 Route::delete('/bookings/{id}/cancel', [PaymentController::class, 'cancel'])->name('bookings.cancel');
+
+
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+Route::get('/owner/dashboard', [OwnerDashboardController::class, 'index'])->name('Owner.Dashboard');
+
+Route::get('/owner/activity', [OwnerActivityController::class, 'ShowOwnerActivityForm'])->name('Owner.Activity');
+
+// routes/web.php
+
+Route::post('/owner/activities', [OwnerActivityController::class, 'store'])->name('owner.activities.store');
+
+Route::get('/owner/booking-history', [PaymentController::class, 'displayBookingHistory'])->name('owner.booking.history');

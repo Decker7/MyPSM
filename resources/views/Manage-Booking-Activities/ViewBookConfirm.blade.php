@@ -63,17 +63,13 @@
                                     {{ old('number_of_children', $bookingDetails['number-of-children'] ?? 'None') }}</p>
                             </li>
                             <li class="flex justify-between py-4">
-                                <p class="text-sm text-gray-600">Preferred Date:</p>
-                                <input type="hidden" name="date" value="{{ $bookingDetails['date'] ?? '' }}">
+                                <p class="text-sm text-gray-600">Preferred Date & Time:</p>
+                                <input type="hidden" name="date_time" value="{{ $bookingDetails['date_time'] ?? '' }}">
                                 <p class="text-sm text-gray-900">
-                                    {{ old('date', \Carbon\Carbon::parse($bookingDetails['date'] ?? '')->format('d-m-Y')) }}
+                                    {{ old('date_time', isset($bookingDetails['date_time']) ? \Carbon\Carbon::parse($bookingDetails['date_time'])->format('d-m-Y H:i') : 'N/A') }}
                                 </p>
                             </li>
-                            <li class="flex justify-between py-4">
-                                <p class="text-sm text-gray-600">Preferred Time:</p>
-                                <input type="hidden" name="time" value="{{ $bookingDetails['time'] ?? '' }}">
-                                <p class="text-sm text-gray-900">{{ old('time', $bookingDetails['time'] ?? 'N/A') }}</p>
-                            </li>
+
                         </ul>
 
                         <!-- Total Price Section -->

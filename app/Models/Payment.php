@@ -22,8 +22,7 @@ class Payment extends Model
         'phone',
         'number_of_adults',
         'number_of_children',
-        'date',
-        'time',
+        'date_time',
         'total_price',
         'special_requests',
     ];
@@ -31,5 +30,10 @@ class Payment extends Model
     public function activity()
     {
         return $this->belongsTo(Activity::class, 'activity_id'); // Adjust 'activity_id' according to your foreign key naming
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
