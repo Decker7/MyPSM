@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Activity;
 use App\Models\Time;
 
-
-
 class OwnerActivityController extends Controller
 {
-    public function ShowOwnerActivityForm()
+    public function showOwnerActivityForm()
     {
         return view('Owner-Page.OwnerActivity');
     }
@@ -31,6 +29,7 @@ class OwnerActivityController extends Controller
 
         // Create a new activity
         $activity = new Activity();
+        $activity->user_id = auth()->user()->id;
         $activity->name = $validated['name'];
         $activity->activity_level = $validated['activity_level'];
         $activity->budget = $validated['budget'];

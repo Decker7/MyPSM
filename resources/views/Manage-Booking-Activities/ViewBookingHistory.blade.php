@@ -1,104 +1,109 @@
 @extends('layout.web')
 
 @section('content')
-    <div class="px-4 mt-20 sm:px-6 lg:px-8">
-        {{-- <div class="mb-6 sm:flex sm:items-center sm:justify-between">
-            <div class="sm:flex-auto">
-                <h1 class="text-2xl font-bold text-gray-900">Booking History</h1>
-                <p class="mt-2 text-sm text-gray-600">A list of all bookings made by the user, including activity details,
-                    payment information, and preferences.</p>
+    <div class="px-4 py-10 mt-20 bg-gray-50 sm:px-6 lg:px-8">
+        <div class="mx-auto max-w-7xl">
+            <div class="mb-8 sm:flex sm:items-center sm:justify-between">
+                <div class="sm:flex-auto">
+                    <h1 class="text-3xl font-bold text-gray-900">Your Eco-Adventure Bookings</h1>
+                    <p class="mt-2 text-lg text-gray-600">Review and manage your upcoming eco-tourism experiences.</p>
+                </div>
             </div>
-        </div> --}}
 
-        <div class="flow-root mt-8">
-            <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                    <div class="overflow-hidden shadow ring-1 ring-black/5 sm:rounded-lg">
-                        <table class="min-w-full divide-y divide-gray-300">
-                            <thead class="bg-gray-50">
-                                <tr>
-                                    <th scope="col"
-                                        class="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6">
-                                        Activity</th>
-                                    <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                                        Total Payments</th>
-                                    <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                                        Preferred Date and Time</th>
-                                    
-                                    <th scope="col" class="relative py-3.5 pl-3 pr-4 text-center sm:pr-6"><span
-                                            class="sr-only">Actions</span></th>
-                                </tr>
-                            </thead>
-                            <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach ($bookings as $booking)
-                                    <tr>
-                                        <td
-                                            class="py-4 pl-4 pr-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap sm:pl-6">
-                                            {{ $booking->activity->name }}</td>
-                                        <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ $booking->total_price }}</td>
-                                        <td class="px-3 py-4 text-sm text-center text-gray-500 whitespace-nowrap">
-                                            {{ \Carbon\Carbon::parse($booking->date_time)->format('Y-m-d') }}</td>
-                                        
-                                        <td
-                                            class="relative py-4 pl-3 pr-4 text-sm font-medium text-center whitespace-nowrap sm:pr-6">
+            <div class="overflow-hidden bg-white rounded-lg shadow-xl">
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-green-50">
+                            <tr>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Activity
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Total Payment
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase">
+                                    Date and Time
+                                </th>
+                                <th scope="col"
+                                    class="px-6 py-3 text-xs font-medium tracking-wider text-center text-gray-500 uppercase">
+                                    Actions
+                                </th>
 
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach ($bookings as $booking)
+                                <tr class="transition-colors duration-200 hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">{{ $booking->activity->name }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">RM {{ number_format($booking->total_price, 2) }}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">
+                                            {{ \Carbon\Carbon::parse($booking->date_time)->format('d M Y, h:i A') }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm font-medium text-center whitespace-nowrap">
+                                        <div class="flex items-center justify-center">
                                             <a href="#" onclick="confirmCancellation(event, {{ $booking->id }})"
-                                                class="inline-flex items-center justify-center px-4 py-2 ml-2 text-sm font-semibold text-white no-underline transition duration-300 bg-red-600 rounded-md shadow-sm hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
-                                                Cancel
+                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-white no-underline transition duration-150 ease-in-out bg-red-600 border border-transparent rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                                                Cancel Booking
                                             </a>
+                                        </div>
+                                    </td>
 
-                                            <form id="cancel-form-{{ $booking->id }}"
-                                                action="{{ route('bookings.cancel', $booking->id) }}" method="POST"
-                                                style="display: none;">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
-
-                                            <script>
-                                                function confirmCancellation(event, bookingId) {
-                                                    event.preventDefault();
-                                                    Swal.fire({
-                                                        title: 'Are you sure?',
-                                                        text: "This action cannot be undone!",
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#d33',
-                                                        cancelButtonColor: '#3085d6',
-                                                        confirmButtonText: 'Yes, cancel it!',
-                                                        cancelButtonText: 'No, keep it'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            document.getElementById('cancel-form-' + bookingId).submit();
-                                                        }
-                                                    });
-                                                }
-                                            </script>
-
-                                            @if (session('success'))
-                                                <script>
-                                                    document.addEventListener('DOMContentLoaded', function() {
-                                                        Swal.fire({
-                                                            icon: 'success',
-                                                            title: 'Success',
-                                                            text: '{{ session('success') }}',
-                                                            timer: 3000, // Auto close after 3 seconds
-                                                            showConfirmButton: false
-                                                        });
-                                                    });
-                                                </script>
-                                            @endif
-
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                <!-- Add any additional rows as necessary -->
-                            </tbody>
-                        </table>
-                    </div>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
+
+        <!-- Hidden forms for cancellation -->
+        @foreach ($bookings as $booking)
+            <form id="cancel-form-{{ $booking->id }}" action="{{ route('bookings.cancel', $booking->id) }}" method="POST"
+                style="display: none;">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endforeach
     </div>
+
+    <script>
+        function confirmCancellation(event, bookingId) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Cancel Booking',
+                text: "Are you sure you want to cancel this eco-adventure? This action cannot be undone.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, cancel it',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById('cancel-form-' + bookingId).submit();
+                }
+            });
+        }
+
+        @if (session('success'))
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Booking Cancelled',
+                    text: '{{ session('success') }}',
+                    timer: 3000,
+                    showConfirmButton: false
+                });
+            });
+        @endif
+    </script>
 @endsection

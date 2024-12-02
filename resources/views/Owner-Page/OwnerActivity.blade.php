@@ -1,91 +1,126 @@
 @extends('layout.ownerweb')
 
 @section('owner_content')
-    <h1 class="mb-4 text-2xl font-bold text-gray-900">Create Owner Activity</h1>
-    <form action="{{ route('owner.activities.store') }}" method="POST" class="space-y-6">
-        @csrf
+<div class="min-h-screen px-4 py-12 bg-gradient-to-br from-blue-50 to-blue-100 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto">
+        <div class="overflow-hidden bg-white shadow-xl rounded-2xl">
+            <div class="px-6 py-8 bg-gradient-to-r from-blue-500 to-blue-600 sm:p-10 sm:pb-6">
+                <h1 class="text-3xl font-extrabold text-white sm:text-4xl">
+                    Create New Eco-Adventure Activity
+                </h1>
+                <p class="mt-2 text-xl text-blue-100">
+                    Inspire travelers with your unique eco-friendly experience
+                </p>
+            </div>
 
-        <!-- Name Field -->
-        <div>
-            <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
-            <input type="text" id="name" name="name" placeholder="Enter activity name"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-        </div>
+            <form action="{{ route('owner.activities.store') }}" method="POST" class="px-6 py-8 space-y-8 sm:p-10">
+                @csrf
 
-        <!-- Activity Level Field -->
-        <div>
-            <label for="activity_level" class="block text-sm font-medium text-gray-700">Activity Level:</label>
-            <select id="activity_level" name="activity_level"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-                <option value="" disabled selected>Select activity level</option>
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
-        </div>
+                <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                    <!-- Name Field -->
+                    <div class="sm:col-span-2">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Activity Name</label>
+                        <div class="mt-1">
+                            <input type="text" id="name" name="name" placeholder="Enter a captivating activity name"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                    </div>
 
-        <!-- Budget Field -->
-        <div>
-            <label for="budget" class="block text-sm font-medium text-gray-700">Budget (RM):</label>
-            <input type="number" id="budget" name="budget" step="0.01" min="0"
-                placeholder="Enter budget amount"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-        </div>
+                    <!-- Activity Level Field -->
+                    <div>
+                        <label for="activity_level" class="block text-sm font-medium text-gray-700">Activity Level</label>
+                        <div class="mt-1">
+                            <select id="activity_level" name="activity_level"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                                <option value="" disabled selected>Select level</option>
+                                <option value="Low">Low - Easy-going and relaxed</option>
+                                <option value="Medium">Medium - Moderate effort required</option>
+                                <option value="High">High - Challenging and intense</option>
+                            </select>
+                        </div>
+                    </div>
 
-        <!-- Time Frame Field -->
-        <div>
-            <label for="time_frame" class="block text-sm font-medium text-gray-700">Time Frame:</label>
-            <select id="time_frame" name="time_frame"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-                <option value="" disabled selected>Select time frame</option>
-                <option value="One Week">One Week</option>
-                <option value="Two Weeks">Two Weeks</option>
-                <option value="One Month">One Month</option>
-            </select>
-        </div>
+                    <!-- Budget Field -->
+                    <div>
+                        <label for="budget" class="block text-sm font-medium text-gray-700">Budget (RM)</label>
+                        <div class="relative mt-1 rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <span class="text-gray-500 sm:text-sm">RM</span>
+                            </div>
+                            <input type="number" id="budget" name="budget" step="0.01" min="0" placeholder="0.00"
+                                class="block w-full py-2 pl-10 pr-3 border-gray-300 rounded-md sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                    </div>
 
-        <!-- Address Field -->
-        <div>
-            <label for="address" class="block text-sm font-medium text-gray-700">Address:</label>
-            <textarea id="address" name="address" placeholder="Enter the activity address"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm resize-y focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                rows="3" required></textarea>
-        </div>
+                    <!-- Time Frame Field -->
+                    <div>
+                        <label for="time_frame" class="block text-sm font-medium text-gray-700">Duration</label>
+                        <div class="mt-1">
+                            <select id="time_frame" name="time_frame"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                                <option value="" disabled selected>Select duration</option>
+                                <option value="One Week">One Week Adventure</option>
+                                <option value="Two Weeks">Two Weeks Expedition</option>
+                                <option value="One Month">One Month Immersion</option>
+                            </select>
+                        </div>
+                    </div>
 
-        <!-- Description Field -->
-        <div>
-            <label for="description" class="block text-sm font-medium text-gray-700">Description:</label>
-            <textarea id="description" name="description" placeholder="Provide a brief description"
-                class="block w-full px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm resize-y focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                rows="5" required></textarea>
-        </div>
+                    <!-- Date Field -->
+                    <div>
+                        <label for="date" class="block text-sm font-medium text-gray-700">Start Date</label>
+                        <div class="mt-1">
+                            <input type="date" id="date" name="date"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                    </div>
 
-        <!-- Date Field -->
-        <div>
-            <label for="date" class="block text-sm font-medium text-gray-700">Date:</label>
-            <input type="date" id="date" name="date"
-                class="block w-1/2 px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-        </div>
+                    <!-- Time Field -->
+                    <div>
+                        <label for="time" class="block text-sm font-medium text-gray-700">Start Time</label>
+                        <div class="mt-1">
+                            <input type="time" id="time" name="time"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required>
+                        </div>
+                    </div>
 
-        <!-- Time Field -->
-        <div>
-            <label for="time" class="block text-sm font-medium text-gray-700">Time:</label>
-            <input type="time" id="time" name="time"
-                class="block w-1/2 px-3 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                required>
-        </div>
+                    <!-- Address Field -->
+                    <div class="sm:col-span-2">
+                        <label for="address" class="block text-sm font-medium text-gray-700">Meeting Point Address</label>
+                        <div class="mt-1">
+                            <textarea id="address" name="address" rows="3" placeholder="Enter the detailed meeting point address"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required></textarea>
+                        </div>
+                    </div>
 
-        <!-- Submit Button -->
-        <div>
-            <button type="submit"
-                class="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-lg shadow-sm hover:bg-indigo-700 focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                Create Activity
-            </button>
+                    <!-- Description Field -->
+                    <div class="sm:col-span-2">
+                        <label for="description" class="block text-sm font-medium text-gray-700">Activity Description</label>
+                        <div class="mt-1">
+                            <textarea id="description" name="description" rows="5" placeholder="Provide an engaging description of the eco-adventure"
+                                class="block w-full border-gray-300 rounded-md shadow-sm sm:text-sm focus:ring-blue-500 focus:border-blue-500"
+                                required></textarea>
+                        </div>
+                        <p class="mt-2 text-sm text-gray-500">Describe the unique aspects and eco-friendly elements of your activity.</p>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-5">
+                    <button type="submit"
+                        class="flex justify-center w-full px-4 py-3 text-sm font-medium text-white transition duration-150 ease-in-out bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                        Create Eco-Adventure Activity
+                    </button>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+</div>
 @endsection
