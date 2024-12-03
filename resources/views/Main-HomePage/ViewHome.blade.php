@@ -27,10 +27,7 @@
                                 class="px-5 py-3 text-sm font-semibold text-white no-underline transition duration-150 ease-in-out transform bg-green-600 rounded-md shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600 hover:-translate-y-1 hover:scale-105">
                                 Get Started
                             </a>
-                            <a href="#"
-                                class="text-sm font-semibold leading-6 text-gray-900 no-underline transition duration-150 ease-in-out hover:text-green-600">
-                                Learn More <span aria-hidden="true" class="ml-1">→</span>
-                            </a>
+                            
                         </div>
                     </div>
                 </div>

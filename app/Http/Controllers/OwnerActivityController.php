@@ -24,8 +24,7 @@ class OwnerActivityController extends Controller
             'address' => 'required|string|max:255',
             'description' => 'required|string',
             'date' => 'required|date',
-            'time' => 'required|date_format:H:i',
-        ]);
+            'time' => 'required|date_format:H:i'       ]);
 
         // Create a new activity
         $activity = new Activity();

@@ -70,7 +70,7 @@
                                     class="block px-4 py-2 text-sm text-gray-700 no-underline transition duration-150 ease-in-out hover:bg-green-50 hover:text-green-700"
                                     role="menuitem"
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                    Sign out
+                                    Log Out
                                 </a>
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                     @csrf

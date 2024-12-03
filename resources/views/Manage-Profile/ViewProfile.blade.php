@@ -5,144 +5,131 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile</title>
+    <title>Your Eco-Profile</title>
     @vite('resources/css/app.css')
 </head>
 
-<body>
-    <div class="flex items-center justify-center min-h-screen mt-20 mb-20">
-        <form class="w-full max-w-4xl" method="POST" action="{{ route('profile.update') }}">
-            @csrf
-            @method('PUT')
+<body class="bg-green-50">
+    <div class="flex items-center justify-center min-h-screen px-4 py-12 sm:px-6 lg:px-8">
+        <div class="w-full max-w-4xl">
+            <div class="mb-10 text-center">
+                <h1 class="text-4xl font-bold text-green-800">Your Eco-Profile</h1>
+                <p class="mt-2 text-xl text-green-600">Manage your account and preferences</p>
+            </div>
 
-            <!-- Success & Error Messages -->
-            @if (session('success'))
-                <div class="p-4 mb-4 text-green-700 bg-green-100 rounded-md">
-                    {{ session('success') }}
-                </div>
-            @endif
+            <form class="overflow-hidden bg-white rounded-lg shadow-xl" method="POST"
+                action="{{ route('profile.update') }}">
+                @csrf
+                @method('PUT')
 
-            @if (session('error'))
-                <div class="p-4 mb-4 text-red-700 bg-red-100 rounded-md">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="p-4 mb-4 text-red-700 bg-red-100 rounded-md">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <div class="space-y-12">
-                <!-- Profile Section -->
-                <div class="grid grid-cols-1 pb-12 border-b gap-x-8 gap-y-10 border-gray-900/10 md:grid-cols-3">
-                    <div>
-                        <h2 class="font-semibold text-gray-900 text-base/7">Profile</h2>
-                        <p class="mt-1 text-gray-600 text-sm/6">This information will be displayed publicly so be
-                            careful what you share.</p>
+                <!-- Success & Error Messages -->
+                @if (session('success'))
+                    <div class="p-4 mb-4 text-green-700 bg-green-100 rounded-t-lg">
+                        {{ session('success') }}
                     </div>
-                    <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-                        <div class="sm:col-span-4">
-                            <label for="username" class="block font-medium text-gray-900 text-sm/6">Username</label>
-                            <div class="mt-2">
-                                <input type="text" id="username" name="username"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your Username" value="{{ Auth::user()->name }}" readonly>
-                            </div>
-                        </div>
+                @endif
 
-                        <div class="sm:col-span-4">
-                            <label for="email" class="block font-medium text-gray-900 text-sm/6">Email</label>
-                            <div class="mt-2">
-                                <input type="email" id="email" name="email"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your Email" value="{{ Auth::user()->email }}" readonly>
-                            </div>
-                        </div>
+                @if (session('error'))
+                    <div class="p-4 mb-4 text-red-700 bg-red-100 rounded-t-lg">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
-                        <div class="sm:col-span-4">
-                            <label for="first_name" class="block font-medium text-gray-900 text-sm/6">First Name</label>
-                            <div class="mt-2">
+                @if ($errors->any())
+                    <div class="p-4 mb-4 text-red-700 bg-red-100 rounded-t-lg">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="p-8 space-y-12">
+                    <!-- Profile Section -->
+                    <div class="pb-12 border-b border-green-200">
+                        <h2 class="mb-6 text-2xl font-semibold text-green-800">Profile Information</h2>
+                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                            <div>
+                                <label for="username" class="block text-sm font-medium text-green-700">Username</label>
+                                <input type="text" id="username" name="username" value="{{ Auth::user()->name }}"
+                                    readonly
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500 bg-green-50">
+                            </div>
+
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-green-700">Email</label>
+                                <input type="email" id="email" name="email" value="{{ Auth::user()->email }}"
+                                    readonly
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500 bg-green-50">
+                            </div>
+
+                            <div>
+                                <label for="first_name" class="block text-sm font-medium text-green-700">First
+                                    Name</label>
                                 <input type="text" id="first_name" name="first_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your First Name" value="{{ Auth::user()->first_name }}">
+                                    value="{{ Auth::user()->first_name }}"
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-4">
-                            <label for="last_name" class="block font-medium text-gray-900 text-sm/6">Last Name</label>
-                            <div class="mt-2">
+                            <div>
+                                <label for="last_name" class="block text-sm font-medium text-green-700">Last
+                                    Name</label>
                                 <input type="text" id="last_name" name="last_name"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your Last Name" value="{{ Auth::user()->last_name }}">
+                                    value="{{ Auth::user()->last_name }}"
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-6">
-                            <label for="bio" class="block font-medium text-gray-900 text-sm/6">Bio</label>
-                            <div class="mt-2">
-                                <textarea id="bio" name="bio" rows="3"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Tell us something about yourself">{{ Auth::user()->bio }}</textarea>
+                            <div class="sm:col-span-2">
+                                <label for="bio" class="block text-sm font-medium text-green-700">Bio</label>
+                                <textarea id="bio" name="bio" rows="4"
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500"
+                                    placeholder="Tell us about your passion for eco-tourism">{{ Auth::user()->bio }}</textarea>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Password Section -->
-                <div class="grid grid-cols-1 pb-12 border-b gap-x-8 gap-y-10 border-gray-900/10 md:grid-cols-3">
+                    <!-- Password Section -->
                     <div>
-                        <h2 class="font-semibold text-gray-900 text-base/7">Change Password</h2>
-                        <p class="mt-1 text-gray-600 text-sm/6">Ensure your password is strong and kept secure.</p>
-                    </div>
-                    <div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
-                        <div class="sm:col-span-4">
-                            <label for="current_password" class="block font-medium text-gray-900 text-sm/6">Current
-                                Password</label>
-                            <div class="mt-2">
+                        <h2 class="mb-6 text-2xl font-semibold text-green-800">Change Password</h2>
+                        <div class="grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-8">
+                            <div class="sm:col-span-2">
+                                <label for="current_password" class="block text-sm font-medium text-green-700">Current
+                                    Password</label>
                                 <input type="password" id="current_password" name="current_password"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your Current Password">
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-4">
-                            <label for="new_password" class="block font-medium text-gray-900 text-sm/6">New
-                                Password</label>
-                            <div class="mt-2">
+                            <div>
+                                <label for="new_password" class="block text-sm font-medium text-green-700">New
+                                    Password</label>
                                 <input type="password" id="new_password" name="new_password"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Your New Password">
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
-                        </div>
 
-                        <div class="sm:col-span-4">
-                            <label for="confirm_password" class="block font-medium text-gray-900 text-sm/6">Confirm New
-                                Password</label>
-                            <div class="mt-2">
+                            <div>
+                                <label for="confirm_password" class="block text-sm font-medium text-green-700">Confirm
+                                    New Password</label>
                                 <input type="password" id="confirm_password" name="new_password_confirmation"
-                                    class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6"
-                                    placeholder="Confirm New Password">
+                                    class="block w-full mt-1 border-green-300 rounded-md shadow-sm focus:border-green-500 focus:ring-green-500">
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flex items-center justify-end mt-6 gap-x-6">
-                <a href="{{ route('Home') }}">
-                    <button type="button" class="font-semibold text-gray-900 text-sm/6">Cancel</button>
-                </a>
-                <button type="submit"
-                    class="px-3 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Save</button>
-            </div>
-        </form>
+                <div class="flex items-center justify-end px-8 py-4 space-x-4 border-t border-green-200 bg-green-50">
+                    <a href="{{ route('Home') }}"
+                        class="px-4 py-2 text-sm font-medium text-green-700 bg-white border border-green-300 rounded-md shadow-sm hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Cancel
+                    </a>
+                    <button type="submit"
+                        class="px-4 py-2 text-sm font-medium text-white bg-green-600 rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                        Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
-    
+
 </html>
