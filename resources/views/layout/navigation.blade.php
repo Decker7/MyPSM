@@ -23,9 +23,14 @@
 
                 <div class="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                     <div class="flex items-center shrink-0">
-                        <img class="w-auto h-10 transition-transform duration-300 ease-in-out transform hover:scale-110"
-                            src="https://tailwindui.com/plus/img/logos/mark.svg?color=green&shade=600"
-                            alt="Your Company">
+                        {{-- Text logo --}}
+                        <a href="{{ route('Home') }}" class="flex items-center no-underline">
+                            <span
+                                class="text-2xl font-bold text-green-600 transition duration-300 ease-in-out transform hover:scale-105">
+                                Eco Adventure <br>
+                                Terengganu
+                            </span>
+                        </a>
                     </div>
                     <div class="hidden sm:ml-8 sm:flex sm:space-x-8">
                         <a href="{{ route('Home') }}"

@@ -68,10 +68,6 @@
                         <p class="mt-6 text-lg leading-8 text-gray-600">We aim to promote Terengganu's unique culture and
                             environment while fostering economic growth in local communities through sustainable tourism.
                         </p>
-                        <div class="mt-10 overflow-hidden bg-gray-100 aspect-w-16 aspect-h-9 rounded-xl">
-                            <img src="{{ asset('images/terengganu-landscape.jpg') }}" alt="Terengganu Landscape"
-                                class="object-cover w-full h-full">
-                        </div>
                     </section>
 
                     <section>

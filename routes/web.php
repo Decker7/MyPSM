@@ -7,7 +7,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\OwnerActivityController;
-
+use App\Models\OwnerActivity;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -113,4 +113,13 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/owner/booking-history', [PaymentController::class, 'displayBookingHistory'])
         ->name('owner.booking.history');
+
+    Route::get('/owner/listActivity', [OwnerActivityController::class, 'displayListActivity'])
+        ->name('owner.list.activity');
+
+    Route::get('/owner/activities/edit/{id}', [OwnerActivityController::class, 'edit'])->name('Owner.Activity.Edit');
+
+    Route::put('/owner/activities/update/{id}', [OwnerActivityController::class, 'update'])->name('Owner.Activity.Update');
+
+    Route::delete('/owner/activities/delete/{id}', [OwnerActivityController::class, 'destroy'])->name('Owner.Activity.Delete');
 });
