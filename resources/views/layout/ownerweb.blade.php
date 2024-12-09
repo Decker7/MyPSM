@@ -66,7 +66,7 @@
                                     </ul>
                                 </li>
                                 <li class="mt-auto space-y-2">
-                                    <a href="#"
+                                    <a href="{{ route('profile.show') }}"
                                         class="flex items-center p-2 -mx-2 text-sm font-semibold leading-6 text-gray-700 rounded-md gap-x-4 hover:bg-gray-50 hover:text-indigo-600">
                                         <svg class="w-6 h-6 text-gray-400 shrink-0 group-hover:text-indigo-600"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -159,14 +159,7 @@
                             </ul>
                         </li>
                         <li class="mt-auto space-y-2">
-                            <a href="#"
-                                class="flex items-center p-2 -mx-2 text-sm font-semibold leading-6 text-gray-700 rounded-md gap-x-4 hover:bg-gray-50 hover:text-indigo-600">
-                                <img class="w-8 h-8 rounded-full bg-gray-50"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
-                                <span class="sr-only">Your profile</span>
-                                <span aria-hidden="true">Tom Cook</span>
-                            </a>
+                            
                             <a href="#"
                                 class="flex items-center p-2 -mx-2 text-sm font-semibold leading-6 text-gray-700 rounded-md gap-x-4 hover:bg-gray-50 hover:text-indigo-600">
                                 <svg class="w-6 h-6 text-gray-400 shrink-0 group-hover:text-indigo-600" fill="none"
