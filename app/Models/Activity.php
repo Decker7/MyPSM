@@ -14,6 +14,7 @@ class Activity extends Model
         'user_id',
         'activity_level',
         'budget',
+        'rating',
         'time_frame',
         'address',
         'description',
@@ -24,5 +25,10 @@ class Activity extends Model
     {
         // If image exists, return the URL, else null
         return $this->image ? asset('images/' . $this->image) : null;
+    }
+
+    public function photos()
+    {
+        return $this->hasMany(Photo::class, 'activities_id');
     }
 }

@@ -4,25 +4,11 @@
 @section('owner_content')
     <div class="min-h-screen bg-gray-100">
         <div class="px-4 py-8 mx-auto max-w-7xl sm:px-6 lg:px-8">
-            <nav class="mb-8" aria-label="Breadcrumb">
-                <ol class="flex items-center space-x-4 text-sm">
-                    <li>
-                        <a href="#" class="text-blue-600 hover:text-blue-800">Home</a>
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                                clip-rule="evenodd" />
-                        </svg>
-                        <span class="ml-4 text-gray-700">Dashboard</span>
-                    </li>
-                </ol>
-            </nav>
+           
 
             <div class="mb-8">
                 <h1 class="text-3xl font-bold text-gray-900">
-                    Welcome back, {{ $userId->name }}!
+                    Welcome back, {{ $user->name }}!
                 </h1>
                 <p class="mt-2 text-gray-600">Here's an overview of your eco-tourism activities and recent bookings.</p>
             </div>
@@ -89,7 +75,7 @@
                                         Revenue This Month
                                     </dt>
                                     <dd class="text-3xl font-semibold text-gray-900">
-                                        RM{{ number_format($revenueThisMonth ?? 15000, 2) }}
+                                        RM{{ number_format($totalRevenue ?? 15000, 2) }}
                                     </dd>
                                 </dl>
                             </div>
@@ -145,31 +131,7 @@
                     </ul>
                 </div>
 
-                <div class="bg-white rounded-lg shadow">
-                    <div class="px-4 py-5 sm:px-6">
-                        <h3 class="text-lg font-medium leading-6 text-gray-900">Quick Actions</h3>
-                    </div>
-                    <div class="px-4 py-5 sm:p-6">
-                        <div class="space-y-4">
-                            <a href="#"
-                                class="block w-full px-4 py-2 text-center text-white transition duration-150 ease-in-out bg-blue-600 rounded-md hover:bg-blue-700">
-                                Add New Activity
-                            </a>
-                            <a href="#"
-                                class="block w-full px-4 py-2 text-center text-blue-600 transition duration-150 ease-in-out bg-white border border-blue-600 rounded-md hover:bg-blue-50">
-                                View All Activities
-                            </a>
-                            <a href="#"
-                                class="block w-full px-4 py-2 text-center text-blue-600 transition duration-150 ease-in-out bg-white border border-blue-600 rounded-md hover:bg-blue-50">
-                                Manage Bookings
-                            </a>
-                            <a href="#"
-                                class="block w-full px-4 py-2 text-center text-blue-600 transition duration-150 ease-in-out bg-white border border-blue-600 rounded-md hover:bg-blue-50">
-                                View Reports
-                            </a>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

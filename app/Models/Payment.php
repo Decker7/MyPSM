@@ -36,4 +36,9 @@ class Payment extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function register()
+    {
+        return $this->hasOne(Register::class, 'booking_id', 'id');
+    }
 }

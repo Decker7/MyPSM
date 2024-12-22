@@ -51,7 +51,7 @@
                                 <li>
                                     <ul role="list" class="-mx-2 space-y-1">
                                         <li>
-                                            <a href="#"
+                                            <a href="{{route('Owner.Dashboard')}}"
                                                 class="flex p-2 text-sm font-semibold leading-6 text-gray-700 rounded-md group gap-x-3 hover:bg-gray-50 hover:text-indigo-600">
                                                 <svg class="w-6 h-6 text-gray-400 shrink-0 group-hover:text-indigo-600"
                                                     fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -113,7 +113,7 @@
                         <li>
                             <ul role="list" class="-mx-2 space-y-1">
                                 <li>
-                                    <a href="#"
+                                    <a href="{{route('Owner.Dashboard')}}"
                                         class="flex p-2 text-sm font-semibold leading-6 text-gray-700 rounded-md group gap-x-3 hover:bg-gray-50 hover:text-indigo-600">
                                         <svg class="w-6 h-6 text-gray-400 shrink-0 group-hover:text-indigo-600"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">

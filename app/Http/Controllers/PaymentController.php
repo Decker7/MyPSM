@@ -7,6 +7,8 @@ use Stripe\Stripe;
 use Stripe\Checkout\Session as StripeSession;
 use App\Models\Activity;
 use App\Models\Payment;
+use App\Models\register;
+
 use App\Models\Time;
 
 use Illuminate\Support\Facades\Auth;
@@ -188,9 +190,17 @@ class PaymentController extends Controller
         }
 
         // Retrieve bookings associated with the authenticated user
-        $bookings = Payment::where('user_id', $user->id)->with('activity')->get();
+        $bookings = Payment::where('user_id', $user->id)
+            ->with('activity') // Eager load the related activity
+            ->get();
 
-        // Pass the bookings to the view
+        // Retrieve the status from the `registers` table for each booking
+        foreach ($bookings as $booking) {
+            $register = register::where('booking_id', $booking->id)->first();
+            $booking->status = $register ? $register->status : 'Not Registered'; // Default status if no match
+        }
+
+        // Pass the bookings (with status) to the view
         return view('Manage-Booking-Activities.ViewBookingHistory', compact('bookings'));
     }
 

@@ -7,6 +7,10 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\OwnerActivityController;
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\RegisterController;
+
+
 use App\Models\OwnerActivity;
 use Illuminate\Support\Facades\Route;
 
@@ -84,6 +88,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/ProceedToPayment', [PaymentController::class, 'processPayment'])
         ->name('booking.payment');
+
+        // Customer Register Arrival
+
+    Route::get('/register/{bookingId}', [RegisterController::class, 'create'])->name('register.create');
+    
+    Route::post('/register/{bookingId}', [RegisterController::class, 'store'])->name('register.store');
+
+    // this is activity details 
+
+    Route::get('/activity/{id}', [ActivityController::class, 'showDetails'])->name('activity.details');
 
     // Booking storage and confirmation routes
     Route::post('/bookings/store/{id}', [PaymentController::class, 'store'])
