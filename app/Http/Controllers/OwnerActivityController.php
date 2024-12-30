@@ -23,11 +23,11 @@ class OwnerActivityController extends Controller
             'time_frame' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'description' => 'required|string',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i'
+            'date.*' => 'required|date',
+            'time.*' => 'required|date_format:H:i',
         ]);
 
-        // Create a new activity
+        // Create the activity
         $activity = new Activity();
         $activity->user_id = auth()->user()->id;
         $activity->name = $validated['name'];
@@ -36,16 +36,19 @@ class OwnerActivityController extends Controller
         $activity->time_frame = $validated['time_frame'];
         $activity->address = $validated['address'];
         $activity->description = $validated['description'];
+        $activity->rating = 0; // Default rating
         $activity->save();
 
-        // Create a new time entry associated with the activity
-        $time = new Time();
-        $time->activity_id = $activity->id;
-        $time->date = $validated['date'];
-        $time->time = $validated['time'];
-        $time->save();
+        // Save multiple times associated with the activity
+        foreach ($request->date as $index => $date) {
+            $time = new Time();
+            $time->activity_id = $activity->id;
+            $time->date = $date;
+            $time->time = $request->time[$index];
+            $time->save();
+        }
 
-        return redirect()->route('Owner.Activity')->with('success', 'Owner activity created successfully!');
+        return redirect()->route('Owner.Activity')->with('success', 'Activity created successfully with multiple time slots!');
     }
 
     public function displayListActivity()

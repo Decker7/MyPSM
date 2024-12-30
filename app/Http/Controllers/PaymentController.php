@@ -200,6 +200,8 @@ class PaymentController extends Controller
             $booking->status = $register ? $register->status : 'Not Registered'; // Default status if no match
         }
 
+
+
         // Pass the bookings (with status) to the view
         return view('Manage-Booking-Activities.ViewBookingHistory', compact('bookings'));
     }
@@ -232,5 +234,19 @@ class PaymentController extends Controller
 
         // Remove the debug dump and return the view with bookings
         return view('Owner-Page.OwnerBookingHistory', compact('bookings'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|in:Pending,Checked In,Checked Out',
+        ]);
+
+        $register = Register::findOrFail($id);
+        $register->update([
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success', 'Register status updated successfully.');
     }
 }

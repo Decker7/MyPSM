@@ -11,7 +11,11 @@ class ProfileController extends Controller
     // Show profile page
     public function show()
     {
-        return view('Manage-Profile.ViewProfile');
+
+        $user = auth()->user();
+        $role = $user->user_type; // Assuming 'role' is a column in your 'users' table.
+    
+        return view('Manage-Profile.ViewProfile', compact('role'));
     }
 
     // Update profile information

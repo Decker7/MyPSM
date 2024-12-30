@@ -14,6 +14,8 @@ class Register extends Model
         'approval_image',
         'phone_number',
         'status', // Include the new column
+        'user_id', // New column for the current user's ID
+
 
     ];
 

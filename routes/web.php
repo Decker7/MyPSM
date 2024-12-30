@@ -9,6 +9,8 @@ use App\Http\Controllers\OwnerDashboardController;
 use App\Http\Controllers\OwnerActivityController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\AdminController;
+
 
 
 use App\Models\OwnerActivity;
@@ -89,10 +91,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/ProceedToPayment', [PaymentController::class, 'processPayment'])
         ->name('booking.payment');
 
-        // Customer Register Arrival
+    // Customer Register Arrival
 
     Route::get('/register/{bookingId}', [RegisterController::class, 'create'])->name('register.create');
-    
+
     Route::post('/register/{bookingId}', [RegisterController::class, 'store'])->name('register.store');
 
     // this is activity details 
@@ -136,4 +138,29 @@ Route::middleware('auth')->group(function () {
     Route::put('/owner/activities/update/{id}', [OwnerActivityController::class, 'update'])->name('Owner.Activity.Update');
 
     Route::delete('/owner/activities/delete/{id}', [OwnerActivityController::class, 'destroy'])->name('Owner.Activity.Delete');
+
+    Route::put('/register/{id}', [PaymentController::class, 'update'])->name('register.update');
+
+    // ======== Admin Route =====
+
+    Route::get('/AdminDashboard', [AdminController::class, 'DashboardView'])->name('AdminDashboard.View');
+
+    Route::get('/admin/activities', [AdminController::class, 'listActivities'])->name('admin.activities.list');
+
+    Route::post('/admin/activities/{id}/update', [AdminController::class, 'updateActivity'])->name('admin.activities.update');
+
+    Route::delete('/admin/activities/{id}', [AdminController::class, 'deleteActivity'])->name('admin.activities.delete');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/users', [AdminController::class, 'listUsers'])->name('admin.users.list');
+    Route::post('/users', [AdminController::class, 'storeUser'])->name('admin.users.store');
+    Route::get('/users/{id}/edit', [AdminController::class, 'editUser'])->name('admin.users.edit');
+    Route::put('/users/{id}', [AdminController::class, 'updateUser'])->name('admin.users.update');
+    Route::delete('/users/{id}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
+
+    Route::get('/admin/feedback', [AdminController::class, 'listFeedback'])->name('admin.feedback.list');
+    Route::get('/admin/feedback/{id}/edit', [AdminController::class, 'editFeedback'])->name('admin.feedback.edit');
+    Route::put('/admin/feedback/{id}', [AdminController::class, 'updateFeedback'])->name('admin.feedback.update');
+    Route::delete('/admin/feedback/{id}', [AdminController::class, 'deleteFeedback'])->name('admin.feedback.delete');
 });

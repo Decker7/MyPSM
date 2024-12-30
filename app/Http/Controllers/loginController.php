@@ -58,9 +58,11 @@ class loginController extends Controller
         $user = Auth::user(); // Get the currently authenticated user
 
         if ($user->user_type === 'customer') {
-            return redirect()->route('Home');
+            return redirect()->route('Home'); // Route for customers
         } elseif ($user->user_type === 'activity_owner') {
-            return redirect()->route('Owner.Dashboard');
+            return redirect()->route('Owner.Dashboard'); // Route for activity owners
+        } elseif ($user->user_type === 'admin') {
+            return redirect()->route('AdminDashboard.View'); // Route for admins
         }
     }
 

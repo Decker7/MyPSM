@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Activity;
 use App\Models\Payment;
-
-
 use Illuminate\Http\Request;
 
 class OwnerDashboardController extends Controller
@@ -14,23 +13,38 @@ class OwnerDashboardController extends Controller
         // Retrieve the authenticated user's ID
         $userId = auth()->id();
 
-        $user = auth()->user();  // This gives the entire user object, including the name
-
+        // Get the authenticated user object
+        $user = auth()->user();
 
         // Count the total activities for the user
         $totalActivities = Activity::where('user_id', $userId)->count();
 
+        // Retrieve all activities for the user
         $activities = Activity::where('user_id', $userId)->get();
 
-        // Get all payments for the activities belonging to the user
+        // Calculate the total revenue for the user's activities
         $totalRevenue = Payment::whereIn('activity_id', $activities->pluck('id'))->sum('total_price');
 
+        // Count the number of upcoming bookings
+        $upcomingBookings = Payment::whereIn('activity_id', $activities->pluck('id'))->count();
 
-        // dd($totalRevenue);
+        // Prepare data for analytics (e.g., graphs)
+        $activityData = $activities->groupBy('activity_level')->map(function ($group) {
+            return $group->count();
+        });
 
-        // Pass the total activities to the view
-        return view('Owner-Page.OwnerDashboard', compact('totalActivities','user', 'totalRevenue'));
+        $budgetData = $activities->groupBy('budget')->map(function ($group) {
+            return $group->count();
+        });
+
+        // Pass the data to the view
+        return view('Owner-Page.OwnerDashboard', compact(
+            'totalActivities',
+            'user',
+            'totalRevenue',
+            'upcomingBookings',
+            'activityData',
+            'budgetData'
+        ));
     }
-
-    
 }

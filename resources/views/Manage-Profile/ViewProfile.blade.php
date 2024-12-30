@@ -118,7 +118,7 @@
                 </div>
 
                 <div class="flex items-center justify-end px-8 py-4 space-x-4 border-t border-green-200 bg-green-50">
-                    <a href="{{ route('Home') }}"
+                    <a href="{{ $role === 'activity_owner' ? route('Owner.Dashboard') : route('Home') }}"
                         class="px-4 py-2 text-sm font-medium text-green-700 bg-white border border-green-300 rounded-md shadow-sm hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
                         Cancel
                     </a>

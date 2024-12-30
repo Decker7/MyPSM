@@ -27,12 +27,13 @@ class RegisterController extends Controller
         $fileName = time() . '_' . $request->file('approval_image')->getClientOriginalName();
         $filePath = $request->file('approval_image')->storeAs('uploads', $fileName, 'public');
 
-        // Create the registration record
+        // Create the registration record with user_id = 2
         Register::create([
             'booking_id' => $booking->id,
             'approval_image' => $filePath,
             'phone_number' => $request->phone_number,
             'status' => 'Pending', // Default status value
+            'user_id' => 2, // Set user_id to 2
         ]);
 
         return redirect()->route('booking.history')->with('success', 'You have successfully registered for the activity.');
