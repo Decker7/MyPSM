@@ -6,15 +6,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    public function run(): void
+    public function run()
     {
+        // Call each seeder in the desired order
         $this->call([
+            AdminUserSeeder::class,
             ActivitySeeder::class,
-            AdminUserSeeder::class, // Include the AdminUserSeeder
-            TimeSeeder::class, // Register the TimeSeeder
-
+            TimeSeeder::class,
+            PhotoSeeder::class,
+            ContactsTableSeeder::class,
+            CodeSeeder::class,
         ]);
     }
-
-    
 }

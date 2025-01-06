@@ -159,6 +159,17 @@
                                         Bookings History
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{route('activity.code')}}"
+                                        class="flex p-2 text-sm font-semibold leading-6 text-gray-700 rounded-md group gap-x-3 hover:bg-gray-50 hover:text-indigo-600">
+                                        <svg class="w-6 h-6 text-gray-400 shrink-0 group-hover:text-indigo-600"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                        Manage Code
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="mt-auto space-y-2">

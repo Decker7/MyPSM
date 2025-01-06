@@ -31,4 +31,10 @@ class Activity extends Model
     {
         return $this->hasMany(Photo::class, 'activities_id');
     }
+
+    public function codes()
+    {
+        return $this->hasMany(Code::class);
+    }
+    
 }

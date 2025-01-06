@@ -11,7 +11,7 @@ class Register extends Model
 
     protected $fillable = [
         'booking_id',
-        'approval_image',
+        'approval_code',
         'phone_number',
         'status', // Include the new column
         'user_id', // New column for the current user's ID

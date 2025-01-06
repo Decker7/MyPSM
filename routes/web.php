@@ -10,7 +10,7 @@ use App\Http\Controllers\OwnerActivityController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\CodeController;
 
 
 use App\Models\OwnerActivity;
@@ -33,6 +33,12 @@ use Illuminate\Support\Facades\Route;
 
 // ========== PUBLIC ROUTES ==========
 // Accessible without authentication
+
+Route::get('/activity/code', [CodeController::class, 'showActivityAndCode'])->name('activity.code')->middleware('auth');
+Route::put('/activity/update-code/{id}', [CodeController::class, 'updateCode'])->name('activity.updateCode');
+
+
+
 Route::get('/', function () {
     return view('Main-HomePage.ViewHome');
 })->name('Home');  // Homepage route
@@ -69,6 +75,8 @@ Route::middleware('auth')->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+
+
     // Profile Routes
     Route::get('/Profile', [LoginController::class, 'profile'])->name('profile');
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
@@ -96,6 +104,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/register/{bookingId}', [RegisterController::class, 'create'])->name('register.create');
 
     Route::post('/register/{bookingId}', [RegisterController::class, 'store'])->name('register.store');
+
 
     // this is activity details 
 
@@ -140,6 +149,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/owner/activities/delete/{id}', [OwnerActivityController::class, 'destroy'])->name('Owner.Activity.Delete');
 
     Route::put('/register/{id}', [PaymentController::class, 'update'])->name('register.update');
+
+
+
+
 
     // ======== Admin Route =====
 

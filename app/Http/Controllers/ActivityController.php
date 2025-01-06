@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Activity;
 use App\Models\Photo;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ class ActivityController extends Controller
 
         // Return the view with activity and photos
         return view('Manage-Booking-Activities.ViewDetailsActivity', compact('photos', 'activity'));
-
     }
+
+  
 }

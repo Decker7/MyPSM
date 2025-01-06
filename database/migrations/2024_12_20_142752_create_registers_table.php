@@ -13,7 +13,7 @@ class CreateRegistersTable extends Migration
             $table->unsignedBigInteger('booking_id'); // Foreign key to payments table
             $table->unsignedBigInteger('user_id')->nullable(); // Add the column
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade'); // Add foreign key constraint
-            $table->string('approval_image'); // To store the uploaded image path
+            $table->string('approval_code'); // Replace approval_image with approval_code
             $table->string('phone_number'); // Additional details from the user
             $table->string('status')->default('Pending'); // Removed 'after' clause
             $table->timestamps();
@@ -22,7 +22,6 @@ class CreateRegistersTable extends Migration
             $table->foreign('booking_id')->references('id')->on('payments')->onDelete('cascade');
         });
     }
-
 
     public function down()
     {
