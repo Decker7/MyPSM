@@ -18,6 +18,7 @@ class CreateActivitiesTable extends Migration
             $table->string('address')->nullable(); // Address of the activity
             $table->text('description')->nullable(); // Description of the activity
             $table->decimal('rating', 2, 1)->nullable(); // Rating for the activity
+            $table->decimal('score', 8, 2)->default(0); // Score for the activity, default 0
             $table->timestamps(); // Created at and updated at timestamps
         });
     }

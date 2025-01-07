@@ -18,6 +18,7 @@ class Activity extends Model
         'time_frame',
         'address',
         'description',
+        'score',
     ];
 
     // Accessor to get the full URL for the image

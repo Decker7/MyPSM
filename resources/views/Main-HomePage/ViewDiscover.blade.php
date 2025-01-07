@@ -15,198 +15,78 @@
                 <div class="pt-12 pb-24 lg:grid lg:grid-cols-3 lg:gap-x-8 xl:grid-cols-4">
                     <aside>
                         <form method="GET" action="{{ route('activities.filter') }}">
-
                             <h2 class="sr-only">Filters</h2>
                             <div class="hidden lg:block">
                                 <form class="space-y-10 divide-y divide-green-200">
+
+                                    <!-- Activity Level Weight -->
                                     <div>
                                         <fieldset>
                                             <legend class="block text-sm font-medium text-green-900">Activity Level</legend>
                                             <div class="pt-6 space-y-3">
-                                                <!-- Leisurely Activity Level -->
                                                 <div class="flex items-center">
-                                                    <input id="activity-level-leisurely" name="activity_level[]"
-                                                        value="Leisurely" type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('activity_level') && in_array('Leisurely', request('activity_level')) ? 'checked' : '' }}>
-                                                    <label for="activity-level-leisurely"
-                                                        class="ml-3 text-sm text-green-700">Leisurely</label>
-                                                </div>
-
-                                                <!-- Moderate Activity Level -->
-                                                <div class="flex items-center">
-                                                    <input id="activity-level-moderate" name="activity_level[]"
-                                                        value="Moderate" type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('activity_level') && in_array('Moderate', request('activity_level')) ? 'checked' : '' }}>
-                                                    <label for="activity-level-moderate"
-                                                        class="ml-3 text-sm text-green-700">Moderate</label>
-                                                </div>
-
-                                                <!-- Challenging Activity Level -->
-                                                <div class="flex items-center">
-                                                    <input id="activity-level-challenging" name="activity_level[]"
-                                                        value="Challenging" type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('activity_level') && in_array('Challenging', request('activity_level')) ? 'checked' : '' }}>
-                                                    <label for="activity-level-challenging"
-                                                        class="ml-3 text-sm text-green-700">Challenging</label>
-                                                </div>
-
-                                                <div class="pt-6 space-y-3">
-                                                    <!-- Add weights input -->
-                                                    <div class="flex items-center">
-                                                        <label for="weight-activity-level"
-                                                            class="block mr-2 text-sm text-green-700">Importance:</label>
-                                                        <input id="weight-activity-level" name="weight_activity_level"
-                                                            type="number" min="0" max="100"
-                                                            class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                            value="{{ old('weight_activity_level') }}">
-                                                    </div>
+                                                    <label for="weight-activity-level"
+                                                        class="block mr-2 text-sm text-green-700">Importance:</label>
+                                                    <input id="weight-activity-level" name="weight_activity_level"
+                                                        type="number" min="0" max="100"
+                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
+                                                        value="{{ old('weight_activity_level') }}">
                                                 </div>
                                             </div>
                                         </fieldset>
                                     </div>
 
-                                    <!-- Budget Filter -->
-
+                                    <!-- Budget Weight -->
                                     <div class="pt-10">
                                         <fieldset>
                                             <legend class="block text-sm font-medium text-green-900">Budget</legend>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
-                                                    <input id="budget-Low" name="budget[]" value="Low" type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('budget') && in_array('Low', request('budget')) ? 'checked' : '' }}>
-                                                    <label for="budget-Low" class="ml-3 text-sm text-green-700">Low
-                                                        Budget: RM50 – RM200</label>
+                                                    <label for="weight-budget"
+                                                        class="block mr-2 text-sm text-green-700">Importance:</label>
+                                                    <input id="weight-budget" name="weight_budget" type="number"
+                                                        min="0" max="100"
+                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
+                                                        value="{{ old('weight_budget') }}">
                                                 </div>
-                                                <div class="flex items-center">
-                                                    <input id="budget-Predium" name="budget[]" value="Predium"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('budget') && in_array('Predium', request('budget')) ? 'checked' : '' }}>
-                                                    <label for="budget-Predium" class="ml-3 text-sm text-green-700">Predium
-                                                        Budget: RM201 –
-                                                        RM500</label>
-                                                </div>
-
-                                                <div class="flex items-center">
-                                                    <input id="budget-High" name="budget[]" value="High" type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('budget') && in_array('High', request('budget')) ? 'checked' : '' }}>
-                                                    <label for="budget-High" class="ml-3 text-sm text-green-700">High
-                                                        Budget: RM501 and above</label>
-                                                </div>
-
-                                                <div class="pt-6 space-y-3">
-                                                    <!-- Add weights input -->
-                                                    <div class="flex items-center">
-                                                        <label for="weight-budget"
-                                                            class="block mr-2 text-sm text-green-700">Importance:</label>
-                                                        <input id="weight-budget" name="weight_budget" type="number"
-                                                            min="0" max="100"
-                                                            class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                            value="{{ old('weight_budget') }}">
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </fieldset>
                                     </div>
+
+                                    <!-- Time Frame Weight -->
                                     <div class="pt-10">
                                         <fieldset>
                                             <legend class="block text-sm font-medium text-green-900">Time Frame</legend>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
-                                                    <input id="time-frame-1" name="time_frame[]" value="Short"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('time_frame') && in_array('Short', request('time_frame')) ? 'checked' : '' }}>
-                                                    <label for="time-frame-1" class="ml-3 text-sm text-green-700">Short
-                                                        (1 - 2 hours)</label>
+                                                    <label for="weight-time-frame"
+                                                        class="block mr-2 text-sm text-green-700">Importance:</label>
+                                                    <input id="weight-time-frame" name="weight_time_frame" type="number"
+                                                        min="0" max="100"
+                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
+                                                        value="{{ old('weight_time_frame') }}">
                                                 </div>
-
-                                                <div class="flex items-center">
-                                                    <input id="time-frame-2" name="time_frame[]" value="Medium"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('time_frame') && in_array('Medium', request('time_frame')) ? 'checked' : '' }}>
-                                                    <label for="time-frame-2" class="ml-3 text-sm text-green-700">Medium
-                                                        (3 - 5 hours)</label>
-                                                </div>
-
-                                                <div class="flex items-center">
-                                                    <input id="time-frame-3" name="time_frame[]" value="Long"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('time_frame') && in_array('Long', request('time_frame')) ? 'checked' : '' }}>
-                                                    <label for="time-frame-3" class="ml-3 text-sm text-green-700">Long (6+
-                                                        hours)</label>
-                                                </div>
-
-                                                <div class="pt-6 space-y-3">
-                                                    <!-- Add weights input -->
-                                                    <div class="flex items-center">
-                                                        <label for="weight-time-frame"
-                                                            class="block mr-2 text-sm text-green-700">Importance:</label>
-                                                        <input id="weight-time-frame" name="weight_time_frame"
-                                                            type="number" min="0" max="100"
-                                                            class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                            value="{{ old('weight_time_frame') }}">
-                                                    </div>
-                                                </div>
-
                                             </div>
                                         </fieldset>
                                     </div>
 
+                                    <!-- Rating Weight -->
                                     <div class="pt-10">
                                         <fieldset>
                                             <legend class="block text-sm font-medium text-green-900">Rating</legend>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
-                                                    <input id="rating-low" name="rating[]" value="Low"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('rating') && in_array('Low', request('rating')) ? 'checked' : '' }}>
-                                                    <label for="rating-low" class="ml-3 text-sm text-green-700">Low Rating
-                                                        (1.0 - 2.9)</label>
-                                                </div>
-
-                                                <div class="flex items-center">
-                                                    <input id="rating-normal" name="rating[]" value="Normal"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('rating') && in_array('Normal', request('rating')) ? 'checked' : '' }}>
-                                                    <label for="rating-normal" class="ml-3 text-sm text-green-700">Normal
-                                                        Rating (3.0 - 4.4)</label>
-                                                </div>
-
-                                                <div class="flex items-center">
-                                                    <input id="rating-high" name="rating[]" value="High"
-                                                        type="checkbox"
-                                                        class="w-4 h-4 text-green-600 border-green-300 rounded focus:ring-green-500"
-                                                        {{ request()->has('rating') && in_array('High', request('rating')) ? 'checked' : '' }}>
-                                                    <label for="rating-high" class="ml-3 text-sm text-green-700">High
-                                                        Rating (4.5 - 5.0)</label>
-                                                </div>
-
-                                                <div class="pt-6 space-y-3">
-                                                    <!-- Add weights input -->
-                                                    <div class="flex items-center">
-                                                        <label for="weight-rating"
-                                                            class="block mr-2 text-sm text-green-700">Importance:</label>
-                                                        <input id="weight-rating" name="weight_rating" type="number"
-                                                            min="0" max="100"
-                                                            class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                            value="{{ old('weight_rating') }}">
-                                                    </div>
+                                                    <label for="weight-rating"
+                                                        class="block mr-2 text-sm text-green-700">Importance:</label>
+                                                    <input id="weight-rating" name="weight_rating" type="number"
+                                                        min="0" max="100"
+                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
+                                                        value="{{ old('weight_rating') }}">
                                                 </div>
                                             </div>
                                         </fieldset>
-
                                     </div>
+
                                     <!-- Filter Submit Button -->
                                     <div class="pt-10">
                                         <button type="submit"
@@ -217,6 +97,7 @@
                             </div>
                         </form>
                     </aside>
+
 
 
                     {{-- THIS IS THE PRODUCT PARTS FOR THE ACTIVITIES --}}
