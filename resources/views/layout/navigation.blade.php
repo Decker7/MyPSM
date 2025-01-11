@@ -39,7 +39,7 @@
                             class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 no-underline transition duration-150 ease-in-out border-b-2 border-transparent hover:border-green-500 hover:text-green-700">CONTACTS</a>
                         <a href="{{ route('About') }}"
                             class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 no-underline transition duration-150 ease-in-out border-b-2 border-transparent hover:border-green-500 hover:text-green-700">ABOUT</a>
-                        <a href="{{ route('activities.filter') }}"
+                        <a href="{{ route('discover') }}"
                             class="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 no-underline transition duration-150 ease-in-out border-b-2 border-transparent hover:border-green-500 hover:text-green-700">DISCOVER
                             ACTIVITY</a>
                         @if ($paymentExists)
@@ -57,11 +57,14 @@
                         <div class="relative ml-3">
                             <!-- Profile button -->
                             <button id="profile-menu-btn"
-                                class="relative flex items-center cursor-pointer group focus:outline-none">
-                                <span class="sr-only">Open user menu</span>
-                                <img class="w-10 h-10 transition duration-300 ease-in-out border-2 border-transparent rounded-full group-hover:border-green-500"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="User profile picture">
+                                class="flex items-center px-3 py-2 text-sm font-medium text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                                <span>Profile</span>
+                                <svg class="w-5 h-5 ml-2 -mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                    fill="currentColor" aria-hidden="true">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
                             </button>
 
                             <!-- Dropdown menu -->
@@ -88,7 +91,8 @@
                                 const profileMenuBtn = document.getElementById('profile-menu-btn');
                                 const profileDropdown = document.getElementById('profile-dropdown');
 
-                                profileMenuBtn.addEventListener('click', function() {
+                                profileMenuBtn.addEventListener('click', function(event) {
+                                    event.stopPropagation();
                                     profileDropdown.classList.toggle('hidden');
                                 });
 
@@ -120,7 +124,7 @@
                     class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 no-underline transition duration-150 ease-in-out border-l-4 border-transparent hover:border-green-300 hover:bg-green-50 hover:text-green-700">Contacts</a>
                 <a href="{{ route('About') }}"
                     class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 no-underline transition duration-150 ease-in-out border-l-4 border-transparent hover:border-green-300 hover:bg-green-50 hover:text-green-700">About</a>
-                <a href="{{ route('activities.filter') }}"
+                <a href="{{ route('discover') }}"
                     class="block py-2 pl-3 pr-4 text-base font-medium text-gray-500 no-underline transition duration-150 ease-in-out border-l-4 border-transparent hover:border-green-300 hover:bg-green-50 hover:text-green-700">Discover
                     Activity</a>
                 @if ($paymentExists)

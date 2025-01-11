@@ -37,6 +37,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/activity/code', [CodeController::class, 'showActivityAndCode'])->name('activity.code')->middleware('auth');
 Route::put('/activity/update-code/{id}', [CodeController::class, 'updateCode'])->name('activity.updateCode');
 
+// Home and Discovery Routes
+Route::get('/MyActivity', [HomeController::class, 'discover'])->name('discover');
+Route::get('/activities/filter', [HomeController::class, 'filterActivities'])->name('activities.filter');
+
+// Activity Detail Routes
+Route::get('/activity/{activity}', [ActivityController::class, 'show'])->name('activity.details');
 
 
 Route::get('/', function () {
@@ -51,8 +57,8 @@ Route::get('/About', function () {
     return view('Main-HomePage.ViewAbout');
 })->name('About');  // About page route
 
-Route::get('/Discover', [HomeController::class, 'filterActivities'])
-    ->name('activities.filter');  // Activity discovery and filtering route
+// Route::get('/Discover', [HomeController::class, 'filterActivities'])
+//     ->name('activities.filter');  // Activity discovery and filtering route
 
 Route::post('/contact', [ContactController::class, 'store'])
     ->name('contact.store');  // Contact form submission route

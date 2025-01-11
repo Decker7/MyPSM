@@ -4,145 +4,156 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
+
+    
+
+    public function discover()
+    {
+        $alternatives = Activity::orderBy('created_at', 'desc')->get();
+        return view('Main-HomePage.ViewDiscover', compact('alternatives'));
+    }
     public function filterActivities(Request $request)
     {
-        // Fetch activities based on initial filter
-        $query = Activity::query();
+        // Validate input weights
+        $request->validate([
+            'weight_activity_level' => 'required|numeric|min:0|max:100',
+            'weight_budget' => 'required|numeric|min:0|max:100',
+            'weight_time_frame' => 'required|numeric|min:0|max:100',
+            'weight_rating' => 'required|numeric|min:0|max:100',
+        ]);
 
-        // Apply filters if provided
-        if ($request->has('activity_level')) {
-            $query->whereIn('activity_level', $request->input('activity_level'));
-        }
-        if ($request->has('budget')) {
-            $query->whereIn('budget_category', $request->input('budget'));
-        }
-        if ($request->has('time_frame')) {
-            $query->whereIn('time_frame', $request->input('time_frame'));
-        }
-        if ($request->has('rating')) {
-            $query->whereIn('rating_category', $request->input('rating'));
-        }
+        // Get all activities from database
+        $activities = Activity::all();
 
-        // Fetch all matching activities
-        $activities = $query->get();
+        // Calculate MCDM scores
+        $scoredActivities = $this->applyMCDM($activities, $request);
 
-        // Apply MCDM if weights are provided
-        $alternatives = $this->applyMCDM($activities, $request);
+        // Update database with new scores
+        DB::transaction(function () use ($scoredActivities) {
+            foreach ($scoredActivities as $activity) {
+                Activity::where('id', $activity['id'])
+                    ->update(['score' => $activity['final_score']]);
+            }
+        });
+
+        // Get sorted activities with updated scores
+        $alternatives = Activity::whereIn('id', collect($scoredActivities)->pluck('id'))
+            ->orderByDesc('score')
+            ->get();
 
         return view('Main-HomePage.ViewDiscover', compact('alternatives'));
     }
 
     private function applyMCDM($activities, Request $request)
     {
-        // Step 1 & 2: Alternatives and Criteria are already defined
+        // Step 1: Extract and normalize weights
+        $weights = $this->normalizeWeights([
+            'activity_level' => $request->input('weight_activity_level'),
+            'budget' => $request->input('weight_budget'),
+            'time_frame' => $request->input('weight_time_frame'),
+            'rating' => $request->input('weight_rating')
+        ]);
 
-        // Step 3: Determine levels for each criterion
-        $weightActivityLevel = $request->input('weight_activity_level', 25) / 100;
-        $weightBudget = $request->input('weight_budget', 25) / 100;
-        $weightTimeFrame = $request->input('weight_time_frame', 25) / 100;
-        $weightRating = $request->input('weight_rating', 25) / 100;
+        // Step 2: Create decision matrix
+        $matrix = $this->createDecisionMatrix($activities);
 
-        // Validate total weights
-        $totalWeight = $weightActivityLevel + $weightBudget + $weightTimeFrame + $weightRating;
-        if (abs($totalWeight - 1) > 0.01) {
-            // Normalize weights if they don't sum to 1
-            $weightActivityLevel /= $totalWeight;
-            $weightBudget /= $totalWeight;
-            $weightTimeFrame /= $totalWeight;
-            $weightRating /= $totalWeight;
-        }
+        // Step 3: Normalize the decision matrix
+        $normalizedMatrix = $this->normalizeMatrix($matrix);
 
-        // Step 4-7: Normalize and evaluate criteria
-        $normalizedActivities = $activities->map(function ($activity) {
-            return [
+        // Step 4: Calculate weighted normalized matrix and final scores
+        $scoredActivities = [];
+        foreach ($activities as $index => $activity) {
+            $weightedScores = [
+                'activity_level' => $normalizedMatrix['activity_level'][$index] * $weights['activity_level'],
+                'budget' => $normalizedMatrix['budget'][$index] * $weights['budget'],
+                'time_frame' => $normalizedMatrix['time_frame'][$index] * $weights['time_frame'],
+                'rating' => $normalizedMatrix['rating'][$index] * $weights['rating']
+            ];
+
+            $finalScore = array_sum($weightedScores);
+
+            $scoredActivities[] = [
                 'id' => $activity->id,
                 'name' => $activity->name,
-                'activity_level_score' => $this->normalizeActivityLevel($activity->activity_level),
-                'budget_score' => $this->normalizeBudget($activity->budget),
-                'time_frame_score' => $this->normalizeTimeFrame($activity->time_frame),
-                'rating_score' => $this->normalizeRating($activity->rating)
+                'final_score' => $finalScore,
+                'criteria_scores' => $weightedScores
             ];
-        });
-
-        // Step 8 & 9: Calculate weighted scores
-        $scoredActivities = $normalizedActivities->map(function ($activity) use (
-            $weightActivityLevel,
-            $weightBudget,
-            $weightTimeFrame,
-            $weightRating
-        ) {
-            $weightedScore =
-                ($activity['activity_level_score'] * $weightActivityLevel) +
-                ($activity['budget_score'] * $weightBudget) +
-                ($activity['time_frame_score'] * $weightTimeFrame) +
-                ($activity['rating_score'] * $weightRating);
-
-            return [
-                'id' => $activity['id'],
-                'name' => $activity['name'],
-                'weighted_score' => $weightedScore
-            ];
-        });
-
-        // Step 10: Rank alternatives
-        $rankedActivities = $scoredActivities->sortByDesc('weighted_score');
-
-        // Fetch full activity details for the top-ranked activities
-        $alternativeIds = $rankedActivities->pluck('id');
-        $alternatives = Activity::whereIn('id', $alternativeIds)
-            ->orderByRaw('FIELD(id, ' . $alternativeIds->implode(',') . ')')
-            ->get();
-
-        return $alternatives;
-    }
-
-    // Normalization helper methods
-    private function normalizeActivityLevel($level)
-    {
-        switch ($level) {
-            case 'Leisurely':
-                return 1.0;
-            case 'Moderate':
-                return 0.5;
-            case 'Challenging':
-                return 0.0;
-            default:
-                return 0.5;
         }
+
+        return $scoredActivities;
     }
 
-    private function normalizeBudget($budget)
+    private function normalizeWeights($weights)
     {
-        // Assuming budget is directly the price
-        // You might want to adjust this based on your specific budget ranges
-        $maxBudget = Activity::max('budget');
-        $minBudget = Activity::min('budget');
-
-        return $maxBudget > $minBudget
-            ? (1 - ($budget - $minBudget) / ($maxBudget - $minBudget))
-            : 0.5;
+        $total = array_sum($weights);
+        return array_map(function ($weight) use ($total) {
+            return $weight / $total;
+        }, $weights);
     }
 
-    private function normalizeTimeFrame($timeFrame)
+    private function createDecisionMatrix($activities)
     {
-        switch ($timeFrame) {
-            case 'Short':
-                return 1.0;
-            case 'Medium':
-                return 0.5;
-            case 'Long':
-                return 0.0;
-            default:
-                return 0.5;
+        $matrix = [
+            'activity_level' => [],
+            'budget' => [],
+            'time_frame' => [],
+            'rating' => []
+        ];
+
+        foreach ($activities as $activity) {
+            $matrix['activity_level'][] = $this->getActivityLevelValue($activity->activity_level);
+            $matrix['budget'][] = $activity->budget;
+            $matrix['time_frame'][] = $this->getTimeFrameValue($activity->time_frame);
+            $matrix['rating'][] = $activity->rating;
         }
+
+        return $matrix;
     }
 
-    private function normalizeRating($rating)
+    private function normalizeMatrix($matrix)
     {
-        // Normalize rating assuming 5 is the max
-        return $rating / 5.0;
+        $normalized = [];
+
+        foreach ($matrix as $criterion => $values) {
+            $max = max($values);
+            $min = min($values);
+            $range = $max - $min;
+
+            if ($criterion == 'budget') {
+                // For budget, lower is better (cost minimization)
+                $normalized[$criterion] = array_map(function ($value) use ($max, $min, $range) {
+                    return $range != 0 ? ($max - $value) / $range : 1;
+                }, $values);
+            } else {
+                // For other criteria, higher is better
+                $normalized[$criterion] = array_map(function ($value) use ($max, $min, $range) {
+                    return $range != 0 ? ($value - $min) / $range : 1;
+                }, $values);
+            }
+        }
+
+        return $normalized;
+    }
+
+    private function getActivityLevelValue($level)
+    {
+        return [
+            'Leisurely' => 1,
+            'Moderate' => 2,
+            'Challenging' => 3
+        ][$level] ?? 2;
+    }
+
+    private function getTimeFrameValue($timeFrame)
+    {
+        return [
+            'Short' => 1,
+            'Medium' => 2,
+            'Long' => 3
+        ][$timeFrame] ?? 2;
     }
 }
