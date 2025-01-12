@@ -145,7 +145,7 @@ class PaymentController extends Controller
 
         session()->forget(['bookingData', 'activity_id', 'total_price']);
 
-        return redirect()->route('activities.filter')->with('success', 'Payment successful and booking confirmed!');
+        return redirect()->route('discover')->with('success', 'Payment successful and booking confirmed!');
     }
 
     public function paymentCancel()

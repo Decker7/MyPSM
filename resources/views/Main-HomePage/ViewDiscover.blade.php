@@ -22,32 +22,85 @@
                                     <!-- Activity Level Weight -->
                                     <div>
                                         <fieldset>
-                                            <legend class="block text-sm font-medium text-green-900">Activity Level</legend>
+                                            <div class="flex items-center justify-between">
+                                                <legend class="block text-sm font-medium text-green-900">Activity Level
+                                                </legend>
+                                                <div class="relative group">
+                                                    <!-- Info Button -->
+                                                    <button type="button" class="text-green-600 hover:text-green-800"
+                                                        aria-label="Activity Level Info">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                    </button>
+                                                    <!-- Tooltip -->
+                                                    <div
+                                                        class="absolute right-0 z-10 hidden w-64 p-2 text-sm text-left text-white bg-green-800 rounded-lg shadow-lg group-hover:block">
+                                                        Assigning a higher weight prioritizes **more intense and challenging
+                                                        activities.
+                                                        <ul class="mt-1 ml-4 list-disc">
+                                                            <li><strong>Leisurely:</strong> Relaxed and easy-going
+                                                                activities.</li>
+                                                            <li><strong>Moderate:</strong> Activities requiring a moderate
+                                                                level of physical effort.</li>
+                                                            <li><strong>Challenging:</strong> High-intensity activities for
+                                                                adventurous individuals.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
                                                     <label for="weight-activity-level"
                                                         class="block mr-2 text-sm text-green-700">Importance:</label>
                                                     <input id="weight-activity-level" name="weight_activity_level"
-                                                        type="number" min="0" max="100"
-                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                        value="{{ old('weight_activity_level') }}">
+                                                        type="number" min="0" max="10" step="0.1"
+                                                        class="w-16 px-2 py-1 text-green-700 border border-green-300 rounded focus:ring focus:ring-green-500"
+                                                        value="{{ old('weight_activity_level') }}" placeholder="0-10">
                                                 </div>
                                             </div>
                                         </fieldset>
                                     </div>
 
+
+
                                     <!-- Budget Weight -->
                                     <div class="pt-10">
                                         <fieldset>
-                                            <legend class="block text-sm font-medium text-green-900">Budget</legend>
+                                            <div class="flex items-center justify-between">
+                                                <legend class="block text-sm font-medium text-green-900">Budget</legend>
+                                                <div class="relative group">
+                                                    <!-- Info Button -->
+                                                    <div class="text-green-600 cursor-pointer hover:text-green-800">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24" aria-label="Budget Info">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                    </div>
+                                                    <!-- Tooltip -->
+                                                    <div
+                                                        class="absolute right-0 z-10 hidden w-64 p-2 text-sm text-left text-white bg-green-800 rounded-lg shadow-lg group-hover:block">
+                                                        Higher weight prioritizes activities that is low in budget:
+                                                        <ul class="mt-1 ml-4 list-disc">
+                                                            <li>Lower-cost activities scored higher</li>
+                                                            <li>Helps find budget-friendly options</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
                                                     <label for="weight-budget"
                                                         class="block mr-2 text-sm text-green-700">Importance:</label>
                                                     <input id="weight-budget" name="weight_budget" type="number"
-                                                        min="0" max="100"
-                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                        value="{{ old('weight_budget') }}">
+                                                        min="0" max="100" step="1"
+                                                        class="w-16 px-2 py-1 text-green-700 border border-green-300 rounded focus:ring focus:ring-green-500"
+                                                        value="{{ old('weight_budget') }}" placeholder="0-10">
                                                 </div>
                                             </div>
                                         </fieldset>
@@ -55,40 +108,90 @@
 
                                     <!-- Time Frame Weight -->
                                     <div class="pt-10">
-                                        <fieldset>
-                                            <legend class="block text-sm font-medium text-green-900">Time Frame</legend>
+                                        <fieldset class="mb-10">
+                                            <div class="flex items-center justify-between">
+                                                <legend class="block text-sm font-medium text-green-900">Time Frame</legend>
+                                                <div class="relative group">
+                                                    <!-- Info Button -->
+                                                    <div class="text-green-600 cursor-pointer hover:text-green-800">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24" aria-label="Time Frame Info">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                    </div>
+                                                    <!-- Tooltip -->
+                                                    <div
+                                                        class="absolute right-0 z-10 hidden w-64 p-2 text-sm text-left text-white bg-green-800 rounded-lg shadow-lg group-hover:block">
+                                                        Assigning a higher weight prioritizes activities that require more
+                                                        time:
+                                                        <ul class="mt-1 ml-4 list-disc">
+                                                            <li><strong>Short:</strong> Quick activities (1-3 hours).</li>
+                                                            <li><strong>Medium:</strong> Half-day activities (4-6 hours).
+                                                            </li>
+                                                            <li><strong>Long:</strong> Full-day activities (7+ hours).</li>
+                                                        </ul>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
                                                     <label for="weight-time-frame"
                                                         class="block mr-2 text-sm text-green-700">Importance:</label>
                                                     <input id="weight-time-frame" name="weight_time_frame" type="number"
-                                                        min="0" max="100"
-                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                        value="{{ old('weight_time_frame') }}">
+                                                        min="0" max="100" step="1"
+                                                        class="w-16 px-2 py-1 text-green-700 border border-green-300 rounded focus:ring focus:ring-green-500"
+                                                        value="{{ old('weight_time_frame') }}" placeholder="0-100">
                                                 </div>
                                             </div>
                                         </fieldset>
                                     </div>
 
                                     <!-- Rating Weight -->
-                                    <div class="pt-10">
-                                        <fieldset>
-                                            <legend class="block text-sm font-medium text-green-900">Rating</legend>
+                                    <div class="">
+                                        <!-- Rating Weight -->
+                                        <fieldset class="mb-10">
+                                            <div class="flex items-center justify-between">
+                                                <legend class="block text-sm font-medium text-green-900">Rating</legend>
+                                                <div class="relative group">
+                                                    <!-- Info Button -->
+                                                    <div class="text-green-600 cursor-pointer hover:text-green-800">
+                                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                            viewBox="0 0 24 24" aria-label="Rating Info">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                    </div>
+                                                    <!-- Tooltip -->
+                                                    <div
+                                                        class="absolute right-0 z-10 hidden w-64 p-2 text-sm text-left text-white bg-green-800 rounded-lg shadow-lg group-hover:block">
+                                                        Higher weight prioritizes highly-rated activities:
+                                                        <ul class="mt-1 ml-4 list-disc">
+                                                            <li>Based on user reviews</li>
+                                                            <li>5-star rating system</li>
+                                                            <li>Helps find popular activities</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="pt-6 space-y-3">
                                                 <div class="flex items-center">
                                                     <label for="weight-rating"
                                                         class="block mr-2 text-sm text-green-700">Importance:</label>
                                                     <input id="weight-rating" name="weight_rating" type="number"
-                                                        min="0" max="100"
-                                                        class="w-16 px-2 py-1 text-green-700 border-green-300 rounded focus:ring-green-500"
-                                                        value="{{ old('weight_rating') }}">
+                                                        min="0" max="100" step="1"
+                                                        class="w-16 px-2 py-1 text-green-700 border border-green-300 rounded focus:ring focus:ring-green-500"
+                                                        value="{{ old('weight_rating') }}" placeholder="0-100">
                                                 </div>
                                             </div>
                                         </fieldset>
                                     </div>
 
                                     <!-- Filter Submit Button -->
-                                    <div class="pt-10">
+                                    <div class="">
                                         <button type="submit"
                                             class="px-4 py-2 font-semibold text-white transition duration-300 bg-green-600 rounded hover:bg-green-700">Find
                                             Your Adventure</button>

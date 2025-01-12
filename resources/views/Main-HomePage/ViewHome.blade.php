@@ -63,6 +63,8 @@
                             ['src' => 'images/Gallery/mountains.jpg', 'alt' => 'Mountains'],
                             ['src' => 'images/Gallery/forest.jpg', 'alt' => 'Forest'],
                             ['src' => 'images/Gallery/pantai.jpg', 'alt' => 'Beach'],
+                            ['src' => 'images/Gallery/pulau-perhentian-2.jpg', 'alt' => 'Pantai'],
+
                         ];
                     @endphp
 

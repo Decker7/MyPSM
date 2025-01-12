@@ -6,49 +6,23 @@
             <div class="grid gap-8 md:grid-cols-2">
                 <!-- Image Gallery -->
                 <div class="p-6 bg-white rounded-lg shadow-md">
-                    @if ($photos->count() > 0)
-                        <div class="relative mb-4">
-                            <div class="overflow-hidden rounded-lg main-image-container">
-                                <img id="mainImage" src="{{ asset('storage/' . $photos->first()->photo_path) }}"
-                                    alt="{{ $activity->name }}"
+                    <div class="relative mb-4">
+                        <div class="overflow-hidden rounded-lg main-image-container">
+                            @if ($photo)
+                                <!-- Display the image using the path stored in the photo object -->
+                                <img src="{{ asset($photo->path_photo) }}" alt="{{ $activity->name }}"
                                     class="object-cover w-full transition-transform duration-500 ease-in-out transform h-96 hover:scale-105">
-                            </div>
-                            @if ($photos->count() > 1)
-                                <button id="prevBtn"
-                                    class="absolute p-2 text-white transition-opacity duration-300 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full opacity-50 hover:opacity-100 left-2 top-1/2">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 19l-7-7 7-7"></path>
-                                    </svg>
-                                </button>
-                                <button id="nextBtn"
-                                    class="absolute p-2 text-white transition-opacity duration-300 transform -translate-y-1/2 bg-black bg-opacity-50 rounded-full opacity-50 hover:opacity-100 right-2 top-1/2">
-                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7"></path>
-                                    </svg>
-                                </button>
+                            @else
+                                <!-- Fallback if no photo is available -->
+                                <div class="p-4 text-center bg-green-100 rounded-lg">
+                                    <p class="text-green-800">No image available for this activity</p>
+                                </div>
                             @endif
                         </div>
-
-                        @if ($photos->count() > 1)
-                            <div class="flex pb-2 space-x-2 overflow-x-auto image-thumbnails">
-                                @foreach ($photos as $index => $photo)
-                                    <img src="{{ asset('storage/' . $photo->photo_path) }}"
-                                        alt="{{ $activity->name }} - Image {{ $loop->iteration }}"
-                                        class="thumbnail-image object-cover w-20 h-20 rounded cursor-pointer transition-opacity duration-300 hover:opacity-75 {{ $loop->first ? 'ring-2 ring-green-500' : '' }}"
-                                        data-index="{{ $index }}">
-                                @endforeach
-                            </div>
-                        @endif
-                    @else
-                        <div class="p-4 text-center bg-green-100 rounded-lg">
-                            <p class="text-green-800">No images available for this activity</p>
-                        </div>
-                    @endif
+                    </div>
                 </div>
+
+
 
                 <!-- Activity Details -->
                 <div class="p-6 bg-white rounded-lg shadow-md">
@@ -114,11 +88,7 @@
                 </div>
             </div>
 
-            <!-- Map Section -->
-            <div class="p-6 mt-8 bg-white rounded-lg shadow-md">
-                <h2 class="mb-4 text-2xl font-semibold text-green-900">Location</h2>
-                <div id="map" class="w-full h-64 rounded-lg"></div>
-            </div>
+            
 
             <!-- Reviews Section -->
             <div class="p-6 mt-8 bg-white rounded-lg shadow-md">
@@ -194,7 +164,7 @@
                 </div>
             </div>
 
-            <!-- Related Activities Section -->
+            {{-- <!-- Related Activities Section -->
             <div class="p-6 mt-8 bg-white rounded-lg shadow-md">
                 <h2 class="mb-4 text-2xl font-semibold text-green-900">Related Activities</h2>
                 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
@@ -223,7 +193,7 @@
                             &rarr;</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 

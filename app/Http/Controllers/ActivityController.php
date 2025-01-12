@@ -13,14 +13,10 @@ class ActivityController extends Controller
         // Find the activity by ID
         $activity = Activity::findOrFail($id);
 
-        // Retrieve associated photos for this activity
-        $photos = Photo::where('activities_id', $id)->get();
+        // Retrieve the first photo for this activity
+        $photo = Photo::where('activities_id', $id)->first();
 
-        // dd($activity);
-
-        // Return the view with activity and photos
-        return view('Manage-Booking-Activities.ViewDetailsActivity', compact('photos', 'activity'));
+        // Return the view with activity and photo
+        return view('Manage-Booking-Activities.ViewDetailsActivity', compact('activity', 'photo'));
     }
-
-  
 }

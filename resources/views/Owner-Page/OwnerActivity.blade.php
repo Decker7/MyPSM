@@ -37,9 +37,13 @@
                                     class="block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                     required>
                                     <option value="" disabled selected>Select level</option>
-                                    <option value="Low">Low - Easy-going and relaxed</option>
-                                    <option value="Medium">Medium - Moderate effort required</option>
-                                    <option value="High">High - Challenging and intense</option>
+                                    <option value="Leisurely">Leisurely - Perfect for a relaxed and carefree experience
+                                    </option>
+                                    <option value="Moderate">Moderate - A balanced activity requiring moderate effort
+                                    </option>
+                                    <option value="Challenging">Challenging - Designed for those seeking intensity and
+                                        adventure</option>
+
                                 </select>
                             </div>
                         </div>
@@ -66,9 +70,9 @@
                                     class="block w-full px-4 py-3 border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                                     required>
                                     <option value="" disabled selected>Select duration</option>
-                                    <option value="One Week">One Week Adventure</option>
-                                    <option value="Two Weeks">Two Weeks Expedition</option>
-                                    <option value="One Month">One Month Immersion</option>
+                                    <option value="One Week">Short (1–2 hours)</option>
+                                    <option value="Two Weeks">Medium (Half-day: 3–5 hours)</option>
+                                    <option value="One Month">Long (Full-day: 6+ hours)</option>
                                 </select>
                             </div>
                         </div>

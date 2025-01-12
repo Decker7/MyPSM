@@ -42,7 +42,7 @@ Route::get('/MyActivity', [HomeController::class, 'discover'])->name('discover')
 Route::get('/activities/filter', [HomeController::class, 'filterActivities'])->name('activities.filter');
 
 // Activity Detail Routes
-Route::get('/activity/{activity}', [ActivityController::class, 'show'])->name('activity.details');
+// Route::get('/activity/{activity}', [ActivityController::class, 'show'])->name('activity.details');
 
 
 Route::get('/', function () {

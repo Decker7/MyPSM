@@ -17,28 +17,28 @@ class PhotoSeeder extends Seeder
         DB::table('photos')->insert([
             [
                 'activities_id' => 1, // Replace with a valid activity ID from the `activities` table
-                'path_photo' => 'images/activity1/photo1.jpg',
+                'path_photo' => 'images/Gallery/pulau-perhentian-1.jpg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'activities_id' => 1, // Replace with a valid activity ID from the `activities` table
-                'path_photo' => 'images/activity1/photo2.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'activities_id' => 2, // Replace with a valid activity ID from the `activities` table
-                'path_photo' => 'images/activity2/photo1.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'activities_id' => 3, // Replace with a valid activity ID from the `activities` table
-                'path_photo' => 'images/activity3/photo1.jpg',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+            // [
+            //     'activities_id' => 1, // Replace with a valid activity ID from the `activities` table
+            //     'path_photo' => 'images/pulau-perhentian-2.jpg',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'activities_id' => 2, // Replace with a valid activity ID from the `activities` table
+            //     'path_photo' => 'images/activity2/photo1.jpg',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
+            // [
+            //     'activities_id' => 3, // Replace with a valid activity ID from the `activities` table
+            //     'path_photo' => 'images/activity3/photo1.jpg',
+            //     'created_at' => now(),
+            //     'updated_at' => now(),
+            // ],
         ]);
     }
 }

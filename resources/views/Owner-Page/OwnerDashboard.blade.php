@@ -11,7 +11,7 @@
                     sustainable travel.</p>
             </div>
 
-            <div class="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div class="grid grid-cols-1 gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-3">
                 <div class="overflow-hidden bg-white rounded-lg shadow-lg">
                     <div class="p-5">
                         <div class="flex items-center">
@@ -80,8 +80,6 @@
                         </div>
                     </div>
                 </div>
-
-                
             </div>
 
             <div class="grid gap-6 mb-8 md:grid-cols-2">
@@ -96,7 +94,7 @@
                 </div>
             </div>
 
-            
+
         </div>
     </div>
 

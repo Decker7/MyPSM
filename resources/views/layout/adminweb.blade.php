@@ -132,29 +132,29 @@
                                         <svg class="w-6 h-6 text-gray-500 shrink-0 group-hover:text-white"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                                         </svg>
                                         Manage Activities
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.users.list')}}"
+                                    <a href="{{ route('admin.users.list') }}"
                                         class="flex p-2 text-sm font-semibold leading-6 text-gray-300 rounded-md group gap-x-3 hover:bg-gray-800 hover:text-white">
                                         <svg class="w-6 h-6 text-gray-500 shrink-0 group-hover:text-white"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                         </svg>
                                         Manage Users
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="{{route('admin.feedback.list')}}"
+                                    <a href="{{ route('admin.feedback.list') }}"
                                         class="flex p-2 text-sm font-semibold leading-6 text-gray-300 rounded-md group gap-x-3 hover:bg-gray-800 hover:text-white">
                                         <svg class="w-6 h-6 text-gray-500 shrink-0 group-hover:text-white"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                         </svg>
                                         Manage Feedbacks
                                     </a>

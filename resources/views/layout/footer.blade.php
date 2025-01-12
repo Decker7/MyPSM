@@ -35,15 +35,15 @@
                 <h3 class="mb-4 text-lg font-semibold text-green-800">Quick Links</h3>
                 <ul class="space-y-2">
                     <li><a href="#"
-                            class="text-sm text-green-600 transition duration-300 hover:text-green-800">Home</a></li>
+                            class="text-sm text-green-600 no-underline transition duration-300 hover:text-green-800">Home</a></li>
                     <li><a href="#"
-                            class="text-sm text-green-600 transition duration-300 hover:text-green-800">Eco
+                            class="text-sm text-green-600 no-underline transition duration-300 hover:text-green-800">Eco
                             Adventures</a></li>
                     <li><a href="#"
-                            class="text-sm text-green-600 transition duration-300 hover:text-green-800">About Us</a>
+                            class="text-sm text-green-600 no-underline transition duration-300 hover:text-green-800">About Us</a>
                     </li>
                     <li><a href="#"
-                            class="text-sm text-green-600 transition duration-300 hover:text-green-800">Contact</a></li>
+                            class="text-sm text-green-600 no-underline transition duration-300 hover:text-green-800">Contact</a></li>
                 </ul>
             </div>
             <div>
