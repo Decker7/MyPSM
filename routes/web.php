@@ -111,6 +111,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/register/{bookingId}', [RegisterController::class, 'store'])->name('register.store');
 
+    
+
 
     // this is activity details 
 

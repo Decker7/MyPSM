@@ -21,18 +21,18 @@ class PhotoSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // [
-            //     'activities_id' => 1, // Replace with a valid activity ID from the `activities` table
-            //     'path_photo' => 'images/pulau-perhentian-2.jpg',
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
-            // [
-            //     'activities_id' => 2, // Replace with a valid activity ID from the `activities` table
-            //     'path_photo' => 'images/activity2/photo1.jpg',
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
+            [
+                'activities_id' => 3, // Replace with a valid activity ID from the `activities` table
+                'path_photo' => 'images/Gallery/pulau-kapas-1.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'activities_id' => 4, // Replace with a valid activity ID from the `activities` table
+                'path_photo' => 'images/Gallery/wetland-1.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
             // [
             //     'activities_id' => 3, // Replace with a valid activity ID from the `activities` table
             //     'path_photo' => 'images/activity3/photo1.jpg',

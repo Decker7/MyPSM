@@ -69,7 +69,7 @@
                                     </ul>
                                 </li>
                                 <li class="mt-auto space-y-2">
-                                    <a href="{{ route('profile.show') }}"
+                                    {{-- <a href="{{ route('profile.show') }}"
                                         class="flex items-center p-2 -mx-2 text-sm font-semibold leading-6 text-gray-300 rounded-md gap-x-4 hover:bg-gray-800 hover:text-white">
                                         <svg class="w-6 h-6 text-gray-500 shrink-0 group-hover:text-white"
                                             fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -77,7 +77,7 @@
                                                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                         </svg>
                                         Your Profile
-                                    </a>
+                                    </a> --}}
                                     <form action="{{ route('logout') }}" method="POST">
                                         @csrf
                                         <button type="submit"
@@ -163,7 +163,7 @@
                         </li>
                         <li class="mt-auto space-y-2">
 
-                            <a href="{{ route('profile.show') }}"
+                            {{-- <a href="{{ route('profile.show') }}"
                                 class="flex items-center p-2 -mx-2 text-sm font-semibold leading-6 text-gray-300 rounded-md gap-x-4 hover:bg-gray-800 hover:text-white">
                                 <svg class="w-6 h-6 text-gray-500 shrink-0 group-hover:text-white" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -171,7 +171,7 @@
                                         d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                 </svg>
                                 Your Profile
-                            </a>
+                            </a> --}}
                             <form action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit"

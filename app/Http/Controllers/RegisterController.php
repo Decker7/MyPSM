@@ -16,11 +16,9 @@ class RegisterController extends Controller
     public function create($bookingId)
     {
         try {
-            // Find the booking based on the booking ID
             $booking = Payment::findOrFail($bookingId);
             return view('Manage-Booking-Activities.ViewRegister', compact('booking'));
         } catch (Exception $e) {
-            // Redirect to the booking history page with an error if booking not found
             return redirect()->route('booking.history')->with('error', 'Booking not found.');
         }
     }
@@ -28,74 +26,69 @@ class RegisterController extends Controller
     public function store(Request $request, $bookingId)
     {
         try {
-            // Validate the input data for approval code and phone number
+            // Validate the input data
             $validated = $request->validate([
                 'approval_code' => 'required|string|max:255',
                 'phone_number' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9]{10,15}$/'],
             ]);
 
-            // Start a database transaction to handle the process atomically
+            // Start a database transaction
             DB::beginTransaction();
 
-            // Retrieve the booking record based on the booking ID
-            $booking = Payment::findOrFail($bookingId);
+            // Retrieve the booking record
+            $booking = Payment::with('activity')->findOrFail($bookingId);
 
-            // Check if the entered approval code exists in the Code table
-            $code = Code::where('code_number', $validated['approval_code'])->first();
+            // Check if the entered approval code exists and matches the activity
+            $code = Code::where('code_number', $validated['approval_code'])
+                ->where('activity_id', $booking->activity_id)
+                ->first();
 
             if (!$code) {
                 DB::rollBack();
                 return redirect()->back()
                     ->withInput()
-                    ->with('error', 'Invalid approval code. Please check and try again.');
+                    ->with('error', 'Invalid approval code for this activity. Please check and try again.');
             }
 
-            // Retrieve the associated activity for this code
-            $activity = Activity::find($code->activity_id);
-
-            if (!$activity) {
+            // Check if the code has already been used
+            $existingRegistration = Register::where('approval_code', $validated['approval_code'])->first();
+            if ($existingRegistration) {
                 DB::rollBack();
                 return redirect()->back()
                     ->withInput()
-                    ->with('error', 'Invalid activity associated with this code.');
+                    ->with('error', 'This approval code has already been used.');
             }
 
-            // Check if the user has already registered for the activity using the same booking ID and approval code
-            $existingRegistration = Register::where('booking_id', $booking->id)
-                ->where('approval_code', $validated['approval_code'])
-                ->first();
-
-            if ($existingRegistration) {
+            // Check if the user has already registered for this booking
+            $existingBookingRegistration = Register::where('booking_id', $booking->id)->first();
+            if ($existingBookingRegistration) {
                 DB::rollBack();
                 return redirect()->back()
                     ->withInput()
                     ->with('error', 'You have already registered for this activity.');
             }
 
-            // Check if the user is authenticated before proceeding with registration
+            // Verify authentication
             if (!Auth::check()) {
                 DB::rollBack();
                 return redirect()->route('login')->with('error', 'You must be logged in to register.');
             }
 
-            // Create a new registration record in the Register table
+            // Create the registration
             Register::create([
                 'booking_id' => $booking->id,
                 'approval_code' => $validated['approval_code'],
                 'phone_number' => $validated['phone_number'],
-                'status' => 'Pending',  // You can adjust this if needed
-                'user_id' => Auth::id(),  // Assign the authenticated user's ID
+                'status' => 'Pending',
+                'user_id' => Auth::id(),
             ]);
 
-
-            // Commit the transaction to persist the data in the database
+            // Commit the transaction
             DB::commit();
 
-            // Redirect to the booking history page with a success message
             return redirect()->route('booking.history')
                 ->with('success', 'You have successfully registered for the activity.');
         } catch (Exception $e) {
-            // In case of error, roll back the transaction and show an error message
             DB::rollBack();
             return redirect()->back()
                 ->withInput()
